@@ -4,9 +4,7 @@ codyssey-onboarding-e1-1-development-workstationhttps
 
 <details>
 <summary><strong> 개발 환경 구축 체크리스트 </strong></summary>
-
-  개발 환경을 직접 구축하고 Git과 Docker를 활용할 수 있는 환경을 만드는 과정을 단계별로 정리한 체크리스트입니다.
-
+개발 환경을 직접 구축하고 Git과 Docker를 활용할 수 있는 환경을 만드는 과정을 단계별로 정리한 체크리스트입니다.
 
 <details>
 <summary><strong> 진행 현황 </strong></summary>
@@ -27,7 +25,7 @@ codyssey-onboarding-e1-1-development-workstationhttps
 | [포트 매핑](#9-포트-매핑) | ⬜ |
 | [Bind Mount](#10-bind-mount) | ⬜ |
 </details>
----
+
 
 ## 0. 준비
 
@@ -348,15 +346,51 @@ Git 저장소를 GitHub와 연결한다.
 
 ### 목표
 
-실습 중 발생한 문제와 해결 과정을 기록한다.
+실습 중 발생할 수 있는 문제와 해결 과정을 기록한다.
 
-### 해야 할 것
+### 발생한 문제 체크
 
-#### 최소 2개 이상 작성
+#### Case 1. Docker 관련 문제
 
-- [ ] Docker 실행 안됨
-- [ ] localhost 접속 안됨
-- [ ] git push 실패
-- [ ] 포트 충돌
+- [ ] Docker Desktop 실행 안됨
+- [ ] Docker 설치 확인 실패
+- [ ] Docker daemon 연결 오류
+- [ ] 컨테이너 실행 실패
+- [ ] 이미지 빌드 실패
 
 ---
+
+#### Case 2. 네트워크 관련 문제
+
+- [ ] localhost 접속 안됨
+- [ ] 포트 충돌 발생
+- [ ] 포트 매핑 오류
+- [ ] 컨테이너 내부 서비스 접근 실패
+
+---
+
+#### Case 3. Git 관련 문제
+
+- [ ] git push 실패
+- [ ] GitHub Repository 연결 오류
+- [ ] commit 누락
+- [ ] branch 오류
+- [ ] Git 인증 오류
+
+---
+
+#### Case 4. 파일 및 권한 문제
+
+- [ ] 파일 접근 권한 오류
+- [ ] chmod 설정 오류
+- [ ] 파일 생성 실패
+- [ ] 폴더 접근 권한 문제
+
+---
+
+#### Case 5. Docker 데이터 관리 문제
+
+- [ ] Bind Mount 연결 실패
+- [ ] Volume 생성 오류
+- [ ] 컨테이너 삭제 후 데이터 손실
+- [ ] 파일 변경 사항 반영 안됨
