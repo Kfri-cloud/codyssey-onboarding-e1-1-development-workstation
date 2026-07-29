@@ -4,7 +4,8 @@ codyssey-onboarding-e1-1-development-workstationhttps
 
 <details>
 <summary><strong> 개발 환경 구축 체크리스트 </strong></summary>
-개발 환경을 직접 구축하고 Git과 Docker를 활용할 수 있는 환경을 만드는 과정을 단계별로 정리한 체크리스트입니다.
+
+  개발 환경을 직접 구축하고 Git과 Docker를 활용할 수 있는 환경을 만드는 과정을 단계별로 정리한 체크리스트입니다.
 
 
 <details>
