@@ -6,6 +6,26 @@ codyssey-onboarding-e1-1-development-workstationhttps
 <summary><strong> 개발 환경 구축 체크리스트 </strong></summary>
 개발 환경을 직접 구축하고 Git과 Docker를 활용할 수 있는 환경을 만드는 과정을 단계별로 정리한 체크리스트입니다.
 
+
+<details>
+<summary><strong> 진행 현황 </strong></summary>
+
+  ## 진행 현황
+
+| 단계 | 완료 |
+|:---|:---:|
+| [준비](#0-준비) | ⬜ |
+| [터미널](#1-터미널-익숙해지기) | ⬜ |
+| [파일 권한](#2-파일-권한) | ⬜ |
+| [Git 설정](#3-git-설정) | ⬜ |
+| [Docker 설치 확인](#4-docker-설치-확인) | ⬜ |
+| [Docker 첫 실행](#5-docker-첫-실행) | ⬜ |
+| [Ubuntu 컨테이너](#6-ubuntu-컨테이너) | ⬜ |
+| [Docker 명령어](#7-docker-명령어) | ⬜ |
+| [Dockerfile 작성](#8-dockerfile-작성) | ⬜ |
+| [포트 매핑](#9-포트-매핑) | ⬜ |
+| [Bind Mount](#10-bind-mount) | ⬜ |
+</details>
 ---
 
 ## 0. 준비
@@ -339,23 +359,3 @@ Git 저장소를 GitHub와 연결한다.
 - [ ] 포트 충돌
 
 ---
-
-## 진행 현황
-
-| 단계 | 완료 |
-|:---|:---:|
-| 준비 | ⬜ |
-| 터미널 | ⬜ |
-| 파일 권한 | ⬜ |
-| Git 설정 | ⬜ |
-| Docker 설치 확인 | ⬜ |
-| Docker 첫 실행 | ⬜ |
-| Ubuntu 컨테이너 | ⬜ |
-| Docker 명령어 | ⬜ |
-| Dockerfile 작성 | ⬜ |
-| 포트 매핑 | ⬜ |
-| Bind Mount | ⬜ |
-| Docker Volume | ⬜ |
-| GitHub 연동 | ⬜ |
-| README 작성 | ⬜ |
-| 트러블슈팅 | ⬜ |
