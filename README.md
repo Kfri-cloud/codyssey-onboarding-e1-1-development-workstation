@@ -1,1118 +1,2535 @@
-codyssey-onboarding-e1-1-development-workstationhttps
-### 코디세이 입학연수과정 E1-1미션(개발자용 작업실)
+# Codyssey E1-1 Mission
 
-<details>
-<summary><strong> 개발 환경 구축 용어 정리 </strong></summary>
+# 개발자용 작업실 구축
+## Development Workstation
 
-# 개발 환경 구축 용어 정리
 
-## 1. 개발 워크스테이션 (Development Workstation)
+> 개발자는 코드를 작성하기 전에 코드를 실행하고 관리할 수 있는 환경을 먼저 준비해야 합니다.
+>
+> 이번 미션에서는 터미널, Git, Docker를 직접 설정하며 개발자가 사용하는 기본 작업 환경을 구축합니다.
 
-### 의미
-
-개발자가 프로그램을 만들기 위해 사용하는 개인 개발 환경입니다.
-
-쉽게 말하면:
-
-> 개발자가 코딩하고 테스트하는 나만의 작업실
-
-입니다.
-
-### 구성 요소
-
-- 운영체제(OS)
-- 터미널
-- Git
-- Docker
-- 개발 도구(VSCode 등)
-
-예시:
-
-```text
-내 컴퓨터
- ├── VSCode (코드 작성)
- ├── Terminal (명령 실행)
- ├── Git (버전 관리)
- └── Docker (실행 환경 관리)
-```
 
 ---
 
-# 2. CLI (Command Line Interface)
+# 프로젝트 소개
 
-## 의미
 
-마우스로 클릭하는 방식이 아니라 명령어를 입력하여 컴퓨터를 조작하는 방식입니다.
+## 목표
 
-예시:
 
-GUI 방식
+개발자가 사용하는 기본 작업 환경을 직접 구축하고,
 
-```text
-폴더 클릭 → 파일 생성
-```
+어디서든 동일한 환경을 다시 만들 수 있는
+재현 가능한 개발 환경 구축 방법을 학습합니다.
 
-CLI 방식
+
+이번 미션에서는 다음 기술을 실습합니다.
+
+
+| 기술 | 내용 |
+|---|---|
+| Linux CLI | 터미널 명령어 사용 |
+| File System | 파일 및 폴더 관리 |
+| Linux Permission | 파일 접근 권한 관리 |
+| Git | 버전 관리 |
+| GitHub | 원격 저장소 관리 |
+| Docker | 컨테이너 기반 환경 구축 |
+| Dockerfile | 실행 환경 자동화 |
+| Port Mapping | 네트워크 연결 |
+| Bind Mount | 파일 공유 |
+| Volume | 데이터 저장 관리 |
+
+
+
+---
+
+# 개발 환경
+
+
+| 항목 | 내용 |
+|---|---|
+| OS | 작성 예정 |
+| Shell | 작성 예정 |
+| Terminal | 작성 예정 |
+| Editor | VSCode |
+| Git Version | 작성 예정 |
+| Docker Version | 작성 예정 |
+
+
+
+## 환경 확인
+
 
 ```bash
-mkdir project
+git --version
+
+docker --version
+
+docker info
 ```
 
-결과:
 
-```text
-project 폴더 생성
-```
 
 ---
 
-# 3. Terminal (터미널)
+# 참고 문서
 
-## 의미
 
-컴퓨터에게 명령어를 입력하는 프로그램입니다.
+## Git
+
+https://git-scm.com/doc
+
+
+## GitHub
+
+https://docs.github.com/
+
+
+## Docker
+
+https://docs.docker.com/
+
+
+## Visual Studio Code
+
+https://code.visualstudio.com/docs
+
+
+
+---
+
+# 개발 워크스테이션 구조
+
+
+```text
+Computer
+
+├── VSCode
+│
+├── Terminal
+│
+├── Git
+│    │
+│    └── Version Control
+│
+└── Docker
+     │
+     ├── Image
+     │
+     └── Container
+          │
+          └── Application
+```
+
+
+
+개발자의 기본 작업 흐름:
+
+
+```text
+코드 작성
+
+↓
+
+Git으로 변경사항 관리
+
+↓
+
+Docker로 실행 환경 구성
+
+↓
+
+GitHub를 통해 공유 및 협업
+```
+
+
+
+---
+
+# 진행 체크리스트
+
+
+| 단계 | 상태 |
+|---|---|
+| Terminal 기본 명령어 학습 | ⬜ |
+| 파일 시스템 이해 | ⬜ |
+| Linux 권한 관리 | ⬜ |
+| Git 설치 및 설정 | ⬜ |
+| GitHub Repository 생성 | ⬜ |
+| Docker 설치 확인 | ⬜ |
+| hello-world 실행 | ⬜ |
+| Ubuntu Container 실행 | ⬜ |
+| Docker 운영 명령어 학습 | ⬜ |
+| Dockerfile 작성 | ⬜ |
+| Web Server Container 실행 | ⬜ |
+| Port Mapping | ⬜ |
+| Bind Mount | ⬜ |
+| Volume 영속성 검증 | ⬜ |
+
+
+
+---
+
+# 핵심 개념 정리
+
+
+<details>
+<summary><strong>1. Terminal & CLI</strong></summary>
+
+
+## CLI(Command Line Interface)
+
+
+CLI는 마우스 클릭 대신 명령어를 입력하여 컴퓨터를 제어하는 방식입니다.
+
+
+개발자는 CLI 환경에서 파일 관리, 프로그램 실행, 서버 관리 등 다양한 작업을 수행합니다.
+
+
+## GUI와 CLI 비교
+
+
+| 구분 | GUI | CLI |
+|---|---|---|
+| 입력 방식 | 마우스 클릭 | 명령어 입력 |
+| 사용 난이도 | 쉬움 | 학습 필요 |
+| 자동화 | 제한적 | 가능 |
+| 개발 활용도 | 낮음 | 높음 |
+
+
+
+---
+
+## Terminal
+
+
+Terminal은 사용자가 명령어를 입력할 수 있도록 제공되는 프로그램입니다.
+
 
 쉽게 말하면:
 
-> 컴퓨터와 대화하는 창구
+
+> 사람이 컴퓨터에게 명령을 전달하는 창구
+
 
 입니다.
 
-예시:
+
+
+예:
+
 
 ```bash
 pwd
 ```
 
+
 결과:
 
+
 ```text
-/home/user/project
+현재 위치 출력
 ```
 
-현재 위치를 확인합니다.
+
 
 ---
 
-# 4. Shell (쉘)
+## Shell
 
-## 의미
 
-터미널에서 입력한 명령어를 해석하여 운영체제에 전달하는 프로그램입니다.
+Shell은 터미널에서 입력한 명령어를 해석하고 운영체제가 실행할 수 있도록 전달하는 프로그램입니다.
 
-쉽게 말하면:
 
-> 사람이 입력한 명령을 컴퓨터가 이해하는 언어로 바꾸는 통역사
+명령 실행 과정:
 
-입니다.
+
+```text
+사용자
+
+↓
+
+Terminal
+
+↓
+
+Shell
+
+↓
+
+Operating System
+
+↓
+
+실행 결과
+```
+
+
 
 대표적인 Shell:
 
-| 종류 | 설명 |
+
+| Shell | 설명 |
 |---|---|
 | bash | Linux 기본 Shell |
 | zsh | macOS 기본 Shell |
-| PowerShell | Windows 기본 Shell |
+| PowerShell | Windows Shell |
+
+
 
 ---
 
-# 5. Linux CLI
+## Linux 기본 명령어
 
-## 의미
-
-Linux 운영체제에서 사용하는 명령어 기반 환경입니다.
-
-주요 명령어:
 
 | 명령어 | 기능 |
 |---|---|
 | pwd | 현재 위치 확인 |
 | ls | 파일 목록 확인 |
-| cd | 폴더 이동 |
+| ls -la | 숨김 파일 확인 |
+| cd | 디렉토리 이동 |
 | mkdir | 폴더 생성 |
 | touch | 파일 생성 |
-| rm | 삭제 |
+| cp | 파일 복사 |
+| mv | 이동 및 이름 변경 |
+| rm | 파일 삭제 |
+| cat | 파일 내용 확인 |
+
+
+
+예시:
+
+
+폴더 생성
+
+
+```bash
+mkdir project
+```
+
+
+파일 생성
+
+
+```bash
+touch index.html
+```
+
+
+파일 확인
+
+
+```bash
+ls
+```
+
+
+</details>
+
 
 ---
 
-# 6. 절대 경로 (Absolute Path)
+<details>
+<summary><strong>2. Path(경로)</strong></summary>
 
-## 의미
 
-파일이나 폴더의 전체 위치를 표시하는 방식입니다.
+## Path란?
 
-예시:
+
+Path는 파일이나 폴더가 저장된 위치를 의미합니다.
+
+
+컴퓨터는 모든 파일을 위치 정보로 관리합니다.
+
+
+
+예:
+
+
+```text
+/home/user/project/index.html
+```
+
+
+
+---
+
+## 절대 경로
+
+
+절대 경로는 파일의 전체 위치를 표시합니다.
+
+
+예:
+
 
 ```text
 /home/user/project/app/index.html
 ```
 
-처음부터 모든 경로를 표시합니다.
 
 비유:
 
-> 서울특별시 강남구 테헤란로 123번지
+
+```text
+서울특별시 강남구 테헤란로 123번지
+```
+
+
+처음부터 끝까지 정확한 주소를 작성하는 방식입니다.
+
+
 
 ---
 
-# 7. 상대 경로 (Relative Path)
+## 상대 경로
 
-## 의미
 
-현재 위치를 기준으로 이동하는 경로입니다.
+상대 경로는 현재 위치를 기준으로 이동하는 방식입니다.
+
 
 현재 위치:
+
 
 ```text
 /home/user/project
 ```
 
-명령:
+
+명령어:
+
 
 ```bash
 cd app
 ```
 
+
 결과:
+
 
 ```text
 /home/user/project/app
 ```
 
+
+
 비유:
 
-> 현재 위치에서 옆방으로 이동
-
----
-
-# 8. 파일 권한 (Permission)
-
-## 의미
-
-파일이나 폴더를 누가 어떻게 사용할 수 있는지 정하는 규칙입니다.
-
-Linux에서는 다음 세 가지로 표현합니다.
 
 ```text
-rwx
+현재 방에서 옆방으로 이동
 ```
 
----
 
-# 9. r / w / x 권한
-
-## r (Read)
-
-읽기 권한
-
-가능한 작업:
-
-- 파일 내용 확인
 
 ---
 
-## w (Write)
+## 주요 경로 기호
 
-쓰기 권한
 
-가능한 작업:
+| 기호 | 의미 |
+|---|---|
+| . | 현재 위치 |
+| .. | 상위 폴더 |
+| / | 최상위 경로 |
+| ~ | 사용자 홈 디렉토리 |
 
-- 파일 수정
-- 데이터 변경
+
+
+</details>
+
+<details>
+<summary><strong>3. Linux 파일 권한</strong></summary>
+
+
+## Linux 권한이란?
+
+
+Linux 운영체제에서는 파일과 폴더마다 접근 권한이 존재합니다.
+
+
+누가 파일을 읽을 수 있는지,
+
+누가 수정할 수 있는지,
+
+누가 실행할 수 있는지를 관리합니다.
+
+
 
 ---
 
-## x (Execute)
+## 권한 구조
 
-실행 권한
-
-가능한 작업:
-
-- 프로그램 실행
-
----
-
-# 10. 755 / 644 권한
-
-Linux에서는 권한을 숫자로 표현할 수 있습니다.
-
-구조:
 
 ```text
-소유자 / 그룹 / 기타 사용자
+rwx rwx rwx
+
+소유자  그룹  기타 사용자
 ```
+
+
+
+| 권한 | 의미 |
+|---|---|
+| r | Read (읽기) |
+| w | Write (쓰기) |
+| x | Execute (실행) |
+
+
+
+---
+
+## 권한 확인
+
+
+파일 권한은 `ls -l` 명령어로 확인할 수 있습니다.
+
+
+```bash
+ls -l
+```
+
+
+
+결과 예시:
+
+
+```text
+-rwxr-xr-x  user user app.sh
+```
+
+
+
+해석:
+
+
+| 대상 | 권한 |
+|---|---|
+| 소유자 | 읽기 / 쓰기 / 실행 |
+| 그룹 | 읽기 / 실행 |
+| 기타 사용자 | 읽기 / 실행 |
+
+
+
+---
+
+## chmod
+
+
+`chmod`는 파일 권한을 변경하는 명령어입니다.
+
+
+기본 형식:
+
+
+```bash
+chmod 권한 파일명
+```
+
+
+
+예:
+
+
+```bash
+chmod 755 app.sh
+```
+
+
 
 ---
 
 ## 755 권한
 
+
 ```text
 rwx r-x r-x
 ```
 
+
 의미:
+
 
 | 대상 | 권한 |
 |---|---|
-| 소유자 | 읽기 + 쓰기 + 실행 |
-| 그룹 | 읽기 + 실행 |
-| 기타 사용자 | 읽기 + 실행 |
+| 소유자 | 읽기 / 쓰기 / 실행 |
+| 그룹 | 읽기 / 실행 |
+| 기타 사용자 | 읽기 / 실행 |
 
-주로:
 
-- 폴더
+주로 사용:
+
 - 실행 파일
+- 폴더
+- 스크립트 파일
 
-에 사용합니다.
+
 
 ---
 
 ## 644 권한
 
+
 ```text
 rw- r-- r--
 ```
 
+
 의미:
+
 
 | 대상 | 권한 |
 |---|---|
-| 소유자 | 읽기 + 쓰기 |
+| 소유자 | 읽기 / 쓰기 |
 | 그룹 | 읽기 |
 | 기타 사용자 | 읽기 |
 
-주로:
 
-- 문서
+주로 사용:
+
 - HTML 파일
+- 문서 파일
+- 설정 파일
 
-에 사용합니다.
+
+
+</details>
+
 
 ---
 
-# 11. Git
+<details>
+<summary><strong>4. Git & GitHub</strong></summary>
 
-## 의미
 
-파일 변경 기록을 관리하는 버전 관리 시스템입니다.
+## Git
 
-쉽게 말하면:
 
-> 작업 내용을 저장하는 기록 시스템
+Git은 파일 변경 이력을 관리하는 버전 관리 시스템입니다.
 
-입니다.
 
-예:
+개발자가 코드를 수정할 때:
+
+- 어떤 파일이 변경되었는지
+- 언제 변경되었는지
+- 이전 상태로 돌아갈 수 있는지
+
+
+를 관리할 수 있습니다.
+
+
+
+---
+
+## Git과 GitHub 차이
+
+
+| 구분 | Git | GitHub |
+|---|---|---|
+| 역할 | 버전 관리 도구 | 저장소 공유 플랫폼 |
+| 위치 | Local PC | Online Server |
+| 목적 | 변경 기록 관리 | 협업 및 공유 |
+
+
+
+---
+
+## Git 기본 흐름
+
 
 ```text
-버전 1
- ↓
-버전 2
- ↓
-버전 3
+파일 수정
+
+↓
+
+git add
+
+↓
+
+git commit
+
+↓
+
+변경 기록 저장
 ```
 
-문제가 발생하면 이전 상태로 돌아갈 수 있습니다.
+
 
 ---
 
-# 12. GitHub
+## Git 저장소 생성
 
-## 의미
 
-Git 저장소를 온라인에서 관리하고 협업하기 위한 서비스입니다.
+```bash
+git init
+```
 
-차이:
 
-| Git | GitHub |
-|---|---|
-| 버전 관리 도구 | 온라인 협업 플랫폼 |
-| 내 컴퓨터에서 사용 | 인터넷 저장소 |
+현재 폴더를 Git 저장소로 설정합니다.
+
+
+
+---
+
+## 변경 파일 확인
+
+
+```bash
+git status
+```
+
+
+현재 변경된 파일 상태를 확인합니다.
+
+
+
+---
+
+## 파일 추가
+
+
+```bash
+git add .
+```
+
+
+변경 내용을 Git 관리 대상으로 추가합니다.
+
+
+
+---
+
+## Commit
+
+
+```bash
+git commit -m "first commit"
+```
+
+
+현재 상태를 하나의 버전으로 저장합니다.
+
+
+
+---
+
+## Git 사용자 설정
+
+
+이름 설정:
+
+
+```bash
+git config --global user.name "이름"
+```
+
+
+
+이메일 설정:
+
+
+```bash
+git config --global user.email "이메일"
+```
+
+
+
+확인:
+
+
+```bash
+git config --list
+```
+
+
+
+---
+
+## GitHub 연결
+
+
+Remote Repository 연결:
+
+
+```bash
+git remote add origin 저장소주소
+```
+
+
+
+Push:
+
+
+```bash
+git push origin main
+```
+
+
+
+GitHub를 통해 다른 사람과 프로젝트를 공유할 수 있습니다.
+
+
+
+</details>
+
+
+---
+
+<details>
+<summary><strong>5. Docker</strong></summary>
+
+
+## Docker란?
+
+
+Docker는 프로그램 실행 환경을 컨테이너 단위로 관리하는 기술입니다.
+
+
+개발 환경 차이로 발생하는 문제를 줄이고,
+
+동일한 실행 환경을 쉽게 만들 수 있도록 도와줍니다.
+
+
+
+---
+
+## 기존 실행 방식의 문제
+
+
+일반적인 프로그램 실행:
+
+
+```text
+내 컴퓨터
+
+↓
+
+프로그램 설치
+
+↓
+
+환경 설정
+
+↓
+
+실행
+```
+
+
+
+문제:
+
+- 운영체제 차이
+- 라이브러리 버전 차이
+- 설정 오류
+
+
+
+---
+
+## Docker 실행 방식
+
+
+```text
+Docker Image
+
+↓
+
+Container 실행
+
+↓
+
+Application 실행
+```
+
+
+
+---
+
+# Image
+
+
+Image는 컨테이너를 생성하기 위한 설계도입니다.
+
 
 비유:
 
-Git:
-
-> 내 컴퓨터 속 작업 기록
-
-GitHub:
-
-> 온라인 공유 저장소
-
----
-
-# 13. Repository (저장소)
-
-## 의미
-
-프로젝트 파일과 변경 기록이 저장되는 공간입니다.
-
-종류:
-
-## Local Repository
-
-내 컴퓨터에 있는 저장소
-
-## Remote Repository
-
-GitHub 같은 원격 저장소
-
----
-
-# 14. Docker
-
-## 의미
-
-프로그램 실행 환경을 컨테이너로 만들어 관리하는 도구입니다.
-
-쉽게 말하면:
-
-> 어떤 컴퓨터에서도 같은 환경을 실행할 수 있도록 만드는 기술
-
-입니다.
-
----
-
-# 15. Container (컨테이너)
-
-## 의미
-
-프로그램과 실행에 필요한 환경을 하나로 묶은 독립 공간입니다.
-
-포함 요소:
 
 ```text
-프로그램
-+
-라이브러리
-+
-설정 파일
+Image = 붕어빵 틀
 ```
+
+
+
+Image에는:
+
+- 운영체제 환경
+- 프로그램
+- 라이브러리
+- 설정 정보
+
+
+가 포함됩니다.
+
+
+
+---
+
+# Container
+
+
+Container는 Image를 실행한 실제 환경입니다.
+
 
 비유:
 
-> 프로그램 전용 작은 방
+
+```text
+Container = 만들어진 붕어빵
+```
+
+
+
+하나의 Image로 여러 개의 Container를 생성할 수 있습니다.
+
+
 
 ---
 
-# 16. Image (이미지)
+## Docker 기본 구조
 
-## 의미
-
-컨테이너를 생성하기 위한 설계도입니다.
-
-비유:
 
 ```text
-이미지 = 붕어빵 틀
-컨테이너 = 만들어진 붕어빵
-```
+Dockerfile
 
-흐름:
+↓
 
-```text
-Image
- ↓
+Image 생성
+
+↓
+
 Container 실행
 ```
 
+
+
 ---
 
-# 17. Dockerfile
+## Docker 설치 확인
 
-## 의미
 
-Docker 이미지를 만들기 위한 설정 파일입니다.
+```bash
+docker --version
+```
+
+
+
+Docker 상태 확인:
+
+
+```bash
+docker info
+```
+
+
+
+---
+
+## Hello World 실행
+
+
+```bash
+docker run hello-world
+```
+
+
+
+Docker가 정상적으로 설치되었다면
+테스트 메시지가 출력됩니다.
+
+
+
+</details>
+
+
+---
+
+# Docker 주요 개념
+
+
+<details>
+<summary><strong>Docker Image와 Container</strong></summary>
+
+
+## Image
+
+
+Image는 실행 환경의 저장된 형태입니다.
+
 
 예:
 
-```dockerfile
-FROM nginx
 
-COPY index.html /usr/share/nginx/html
+```text
+Ubuntu Image
+
+↓
+
+Ubuntu Container
 ```
 
-의미:
 
-1. nginx 이미지 사용
-2. 웹 파일 복사
 
 ---
 
-# 18. Docker Build
+## Container
 
-## 의미
 
-Dockerfile을 이용하여 이미지를 만드는 과정입니다.
+Container는 Image를 실행한 독립적인 환경입니다.
 
-명령어:
+
+특징:
+
+- 독립 실행 가능
+- 빠른 생성 가능
+- 삭제 및 재생성 가능
+
+
+
+</details>
+
+
+---
+
+<details>
+<summary><strong>Dockerfile</strong></summary>
+
+
+## Dockerfile이란?
+
+
+Dockerfile은 Docker Image를 자동으로 생성하기 위한 설정 파일입니다.
+
+
+직접 환경을 설정하는 대신,
+
+명령어를 작성하면 Docker가 자동으로 환경을 구성합니다.
+
+
+
+---
+
+예:
+
+
+```dockerfile
+FROM nginx:alpine
+
+COPY app/ /usr/share/nginx/html/
+```
+
+
+
+설명:
+
+
+| 명령어 | 의미 |
+|---|---|
+| FROM | 사용할 기본 Image 지정 |
+| COPY | 파일 복사 |
+
+
+
+---
+
+## Image 생성
+
 
 ```bash
 docker build -t my-web .
 ```
 
-흐름:
 
-```text
-Dockerfile
- ↓
-Image 생성
-```
 
 ---
 
-# 19. Docker Run
+## Container 실행
 
-## 의미
-
-이미지를 기반으로 컨테이너를 실행하는 명령어입니다.
 
 ```bash
-docker run my-web
+docker run -d -p 8080:80 my-web
 ```
 
-흐름:
 
-```text
-Image
- ↓
-Container 실행
-```
+
+</details>
+
 
 ---
 
-# 20. Docker Daemon
+<details>
+<summary><strong>Port Mapping</strong></summary>
 
-## 의미
 
-Docker 작업을 실제로 처리하는 백그라운드 프로그램입니다.
+## Port Mapping이란?
 
-흐름:
 
-```text
-Docker 명령어
-      ↓
-Docker CLI
-      ↓
-Docker Daemon
-      ↓
-Container 생성
-```
+컨테이너 내부의 포트와
+내 컴퓨터의 포트를 연결하는 기능입니다.
 
----
 
-# 21. Port (포트)
-
-## 의미
-
-컴퓨터에서 프로그램을 구분하는 번호입니다.
-
-비유:
-
-> 아파트의 방 번호
 
 예:
 
-```text
-localhost:8080
-```
-
-의미:
-
-```text
-내 컴퓨터의 8080번 포트
-```
-
----
-
-# 22. Port Mapping
-
-## 의미
-
-컴퓨터의 포트와 컨테이너의 포트를 연결하는 기능입니다.
-
-예:
 
 ```bash
 -p 8080:80
 ```
 
-의미:
 
-```text
-내 컴퓨터 8080번
-        ↓
-컨테이너 80번
-```
-
----
-
-# 23. Bind Mount
-
-## 의미
-
-호스트 컴퓨터의 파일을 컨테이너와 직접 연결하는 방식입니다.
 
 구조:
 
+
 ```text
-내 컴퓨터 파일
-      ↕
-컨테이너 파일
+내 컴퓨터
+
+8080 Port
+
+↓
+
+Container
+
+80 Port
 ```
 
-특징:
 
-- 파일 변경 즉시 반영 가능
+
+사용자가:
+
+```
+localhost:8080
+```
+
+
+으로 접속하면
+
+Container 내부의 웹 서비스로 연결됩니다.
+
+
+
+</details>
+
+<details>
+<summary><strong>Bind Mount</strong></summary>
+
+
+## Bind Mount란?
+
+
+Bind Mount는 호스트 컴퓨터의 파일과
+컨테이너 내부 파일을 연결하는 기능입니다.
+
+
+즉,
+
+내 컴퓨터의 파일을 수정하면
+컨테이너 내부에서도 변경된 내용을 바로 확인할 수 있습니다.
+
+
 
 ---
 
-# 24. Volume
+## 구조
 
-## 의미
-
-Docker가 관리하는 데이터 저장 공간입니다.
-
-목적:
-
-> 컨테이너가 삭제되어도 데이터를 유지하기 위해 사용
-
-예:
 
 ```text
-컨테이너 삭제
+Host Computer
 
-데이터 ❌ 삭제
+app/index.html
 
-Volume 사용
+        ↕
 
-데이터 ⭕ 유지
+Container
+
+/usr/share/nginx/html/index.html
 ```
+
+
 
 ---
 
-# 25. Log (로그)
+## 사용 예시
 
-## 의미
 
-프로그램 실행 기록입니다.
+```bash
+docker run \
+-v ./app:/usr/share/nginx/html \
+-p 8080:80 nginx
+```
 
-확인 명령어:
+
+
+설명:
+
+
+| 옵션 | 의미 |
+|---|---|
+| -v | Volume 또는 Mount 연결 |
+| ./app | 내 컴퓨터 폴더 |
+| /usr/share/nginx/html | Container 내부 경로 |
+| -p | Port 연결 |
+
+
+
+---
+
+## 특징
+
+
+장점:
+
+- 코드 수정 즉시 반영
+- 개발 환경에서 편리함
+- 로컬 파일과 Container 연결 가능
+
+
+사용 사례:
+
+- 웹 개발
+- 코드 개발
+- 테스트 환경 구성
+
+
+
+</details>
+
+
+---
+
+<details>
+<summary><strong>Docker Volume</strong></summary>
+
+
+## Volume이란?
+
+
+Volume은 Container가 삭제되어도 데이터를 유지하기 위한 저장 공간입니다.
+
+
+Container 내부에 저장한 데이터는 Container 삭제 시 함께 사라질 수 있습니다.
+
+
+Volume을 사용하면 데이터를 안전하게 보관할 수 있습니다.
+
+
+
+---
+
+## Container 데이터 문제
+
+
+일반적인 경우:
+
+
+```text
+Container 생성
+
+↓
+
+데이터 저장
+
+↓
+
+Container 삭제
+
+↓
+
+데이터 삭제
+```
+
+
+
+---
+
+## Volume 사용
+
+
+```text
+Volume 생성
+
+↓
+
+Container 연결
+
+↓
+
+데이터 저장
+
+↓
+
+Container 삭제
+
+↓
+
+Volume 데이터 유지
+```
+
+
+
+---
+
+## Volume 생성
+
+
+```bash
+docker volume create mydata
+```
+
+
+
+---
+
+## Container 연결
+
+
+```bash
+docker run \
+-v mydata:/data \
+ubuntu
+```
+
+
+
+---
+
+## Volume 확인
+
+
+```bash
+docker volume ls
+```
+
+
+
+---
+
+## 특징
+
+
+- 데이터 영속성 제공
+- Container 재생성 가능
+- 데이터 백업 가능
+
+
+
+</details>
+
+
+---
+
+# 실습 기록
+
+
+## 1. Terminal 실습
+
+
+### 목표
+
+Linux 기본 명령어를 사용하여
+파일과 폴더를 관리합니다.
+
+
+
+---
+
+## 사용 명령어
+
+
+```bash
+pwd
+
+ls -la
+
+mkdir
+
+touch
+
+cp
+
+mv
+
+rm
+
+cat
+```
+
+
+
+---
+
+## 실습 과정
+
+
+폴더 생성:
+
+
+```bash
+mkdir project
+```
+
+
+
+폴더 이동:
+
+
+```bash
+cd project
+```
+
+
+
+파일 생성:
+
+
+```bash
+touch index.html
+```
+
+
+
+파일 확인:
+
+
+```bash
+ls
+```
+
+
+
+---
+
+## 결과
+
+
+실행 결과 캡처:
+
+
+```
+스크린샷 첨부
+```
+
+
+
+</details>
+
+
+---
+
+<details>
+<summary><strong>2. Linux 파일 권한 실습</strong></summary>
+
+
+## 권한 확인
+
+
+```bash
+ls -l
+```
+
+
+
+---
+
+## 권한 변경
+
+
+```bash
+chmod 755 파일명
+
+chmod 644 파일명
+```
+
+
+
+---
+
+## 확인 과정
+
+
+변경 전:
+
+
+```
+-rw-r--r--
+```
+
+
+
+변경 후:
+
+
+```
+-rwxr-xr-x
+```
+
+
+
+---
+
+## 결과
+
+
+권한 변경 전/후 캡처:
+
+
+```
+스크린샷 첨부
+```
+
+
+
+</details>
+
+
+---
+
+<details>
+<summary><strong>3. Git 설정 및 GitHub 연결</strong></summary>
+
+
+## Git 사용자 설정
+
+
+```bash
+git config user.name
+
+git config user.email
+```
+
+
+
+확인:
+
+
+```bash
+git config --list
+```
+
+
+
+---
+
+## Repository 생성
+
+
+Git 초기화:
+
+
+```bash
+git init
+```
+
+
+
+파일 추가:
+
+
+```bash
+git add .
+```
+
+
+
+Commit:
+
+
+```bash
+git commit -m "initial commit"
+```
+
+
+
+---
+
+## GitHub 연결
+
+
+Remote 등록:
+
+
+```bash
+git remote add origin Repository_URL
+```
+
+
+
+Push:
+
+
+```bash
+git push origin main
+```
+
+
+
+---
+
+## 결과
+
+
+GitHub Repository 업로드 화면:
+
+
+```
+스크린샷 첨부
+```
+
+
+
+</details>
+
+
+---
+
+<details>
+<summary><strong>4. Docker Container 실행</strong></summary>
+
+
+## Docker 버전 확인
+
+
+```bash
+docker --version
+```
+
+
+
+Docker 상태 확인:
+
+
+```bash
+docker info
+```
+
+
+
+---
+
+# Hello World 실행
+
+
+```bash
+docker run hello-world
+```
+
+
+
+결과:
+
+
+```
+Hello from Docker!
+```
+
+
+
+---
+
+# Ubuntu Container 실행
+
+
+실행:
+
+
+```bash
+docker run -it ubuntu bash
+```
+
+
+
+Container 내부 명령:
+
+
+```bash
+ls
+
+echo hello
+
+exit
+```
+
+
+
+---
+
+## Container 확인
+
+
+실행 중 Container:
+
+
+```bash
+docker ps
+```
+
+
+
+전체 Container:
+
+
+```bash
+docker ps -a
+```
+
+
+
+</details>
+
+
+---
+
+<details>
+<summary><strong>5. Docker 운영 명령어</strong></summary>
+
+
+## Image 확인
+
+
+```bash
+docker images
+```
+
+
+
+---
+
+## Container 확인
+
+
+```bash
+docker ps
+
+docker ps -a
+```
+
+
+
+---
+
+## Container 로그 확인
+
 
 ```bash
 docker logs 컨테이너명
 ```
 
-확인 내용:
 
-- 실행 상태
-- 오류 내용
-- 동작 기록
 
 ---
 
-# 26. Debugging (디버깅)
+## 리소스 확인
 
-## 의미
 
-문제를 찾고 해결하는 과정입니다.
-
-과정:
-
-```text
-문제 발생
- ↓
-원인 추측
- ↓
-확인
- ↓
-수정
- ↓
-재실행
+```bash
+docker stats
 ```
 
----
 
-# 27. CI/CD
-
-## 의미
-
-코드 테스트와 배포 과정을 자동화하는 시스템입니다.
-
-## CI (Continuous Integration)
-
-코드 변경을 자동으로 검사하고 테스트
-
-## CD (Continuous Deployment)
-
-검증된 코드를 자동 배포
 
 ---
 
-# 28. Docker Compose
+## Container 삭제
 
-## 의미
 
-여러 컨테이너를 한 번에 관리하는 도구입니다.
+```bash
+docker rm 컨테이너명
+```
+
+
+
+---
+
+## Image 삭제
+
+
+```bash
+docker rmi 이미지명
+```
+
+
+
+</details>
+
+
+---
+
+# Docker Web Server 제작
+
+
+<details>
+<summary><strong>Nginx 웹 서버 Container 만들기</strong></summary>
+
+
+## 프로젝트 구조
+
+
+```text
+project
+
+├── Dockerfile
+
+└── app
+
+    └── index.html
+```
+
+
+
+---
+
+## index.html 작성
+
+
+```html
+<html>
+
+<body>
+
+<h1>
+Hello Docker
+</h1>
+
+</body>
+
+</html>
+```
+
+
+
+---
+
+## Dockerfile 작성
+
+
+```dockerfile
+FROM nginx:alpine
+
+COPY app/ /usr/share/nginx/html/
+```
+
+
+
+---
+
+## Image 생성
+
+
+```bash
+docker build -t my-web .
+```
+
+
+
+---
+
+## Container 실행
+
+
+```bash
+docker run -d \
+-p 8080:80 \
+my-web
+```
+
+
+
+---
+
+## 접속
+
+
+브라우저:
+
+
+```
+http://localhost:8080
+```
+
+
+
+---
+
+## 결과
+
+
+웹 페이지 출력 화면:
+
+
+```
+스크린샷 첨부
+```
+
+
+
+</details>
+
+
+---
+
+# Bind Mount 실습
+
+
+<details>
+<summary><strong>파일 변경 실시간 반영 확인</strong></summary>
+
+
+## 실행
+
+
+```bash
+docker run \
+-v ./app:/usr/share/nginx/html \
+-p 8080:80 \
+nginx
+```
+
+
+
+---
+
+## 테스트
+
+
+1. index.html 수정
+
+2. 저장
+
+3. 브라우저 새로고침
+
+4. 변경 내용 확인
+
+
+
+---
+
+## 결과
+
+
+```
+파일 수정 내용 즉시 반영 확인
+```
+
+
+
+</details>
+
+
+---
+
+# Volume 영속성 검증
+
+
+<details>
+<summary><strong>Container 삭제 후 데이터 유지 확인</strong></summary>
+
+
+## Volume 생성
+
+
+```bash
+docker volume create mydata
+```
+
+
+
+---
+
+## Container 연결
+
+
+```bash
+docker run \
+-it \
+-v mydata:/data \
+ubuntu bash
+```
+
+
+
+---
+
+## 데이터 생성
+
+
+```bash
+echo hello > /data/test.txt
+```
+
+
+
+---
+
+## Container 종료
+
+
+```bash
+exit
+```
+
+
+
+---
+
+## 새로운 Container 실행
+
+
+```bash
+docker run \
+-it \
+-v mydata:/data \
+ubuntu bash
+```
+
+
+
+확인:
+
+
+```bash
+cat /data/test.txt
+```
+
+
+
+---
+
+## 결과
+
+
+Container가 삭제되어도
+Volume 데이터가 유지되는 것을 확인합니다.
+
+
+
+</details>
+
+# Troubleshooting
+
+
+<details>
+<summary><strong>Case 1. Docker 명령어 실행 오류</strong></summary>
+
+
+## 문제
+
+
+Docker 명령어 실행 시 오류 발생
+
 
 예:
 
+
 ```text
-웹 서버 Container
-+
-DB Container
+Cannot connect to the Docker daemon
 ```
 
-여러 서비스를 함께 실행할 수 있습니다.
+
 
 ---
 
-# 29. Environment Variable (환경 변수)
+## 원인
 
-## 의미
 
-프로그램 설정 값을 코드 외부에서 관리하는 값입니다.
+Docker Engine이 실행되지 않은 상태일 수 있습니다.
+
+
+
+---
+
+## 확인
+
+
+```bash
+docker info
+```
+
+
+
+---
+
+## 해결 방법
+
+
+Docker Desktop 실행 후 다시 확인합니다.
+
+
+확인:
+
+
+```bash
+docker --version
+
+docker info
+```
+
+
+
+---
+
+## 결과
+
+
+Docker 정상 실행 확인
+
+
+
+</details>
+
+
+---
+
+<details>
+<summary><strong>Case 2. localhost 접속 실패</strong></summary>
+
+
+## 문제
+
+
+Docker Container는 실행되었지만
+웹 페이지 접속 불가
+
+
+
+---
+
+## 원인
+
+
+Port Mapping 설정 문제 가능
+
+
+확인:
+
+
+```bash
+docker ps
+```
+
+
+
+출력 예:
+
+
+```text
+PORTS
+
+0.0.0.0:8080->80/tcp
+```
+
+
+
+---
+
+## 해결
+
+
+Container 실행 시 포트 연결 확인
+
+
+```bash
+docker run -p 8080:80 이미지명
+```
+
+
+
+접속:
+
+
+```
+http://localhost:8080
+```
+
+
+
+</details>
+
+
+---
+
+<details>
+<summary><strong>Case 3. Container 내부 파일 변경 불가</strong></summary>
+
+
+## 문제
+
+
+Container 내부 파일 수정이 반영되지 않음
+
+
+
+---
+
+## 원인
+
+
+Bind Mount 설정 누락
+
+
+
+---
+
+## 확인
+
+
+Container 실행 옵션 확인
+
+
+```bash
+docker inspect 컨테이너명
+```
+
+
+
+---
+
+## 해결
+
+
+Bind Mount 연결
+
+
+```bash
+docker run \
+-v ./app:/usr/share/nginx/html \
+-p 8080:80 nginx
+```
+
+
+
+</details>
+
+
+---
+
+<details>
+<summary><strong>Case 4. Permission Denied 오류</strong></summary>
+
+
+## 문제
+
+
+파일 실행 또는 수정 시 권한 오류 발생
+
+
 
 예:
 
+
 ```text
-PORT=8080
-MODE=production
+Permission denied
 ```
 
-장점:
 
-- 코드 수정 없이 설정 변경 가능
 
 ---
 
-# 30. SSH
+## 원인
 
-## 의미
 
-보안 키를 이용하여 원격 서버나 GitHub에 연결하는 방식입니다.
+파일 권한 부족
 
-비교:
 
-| 방식 | 특징 |
-|---|---|
-| HTTPS | 아이디/비밀번호 기반 |
-| SSH | 키 인증 기반 |
 
 ---
 
-# 전체 개발 환경 흐름
+## 확인
+
+
+```bash
+ls -l
+```
+
+
+
+---
+
+## 해결
+
+
+권한 변경:
+
+
+```bash
+chmod 755 파일명
+```
+
+
+
+또는:
+
+
+```bash
+chmod 644 파일명
+```
+
+
+
+</details>
+
+
+
+---
+
+# Repository 구조
+
+
+최종 Repository 구조:
+
+
+```text
+development-workstation
+
+
+├── README.md
+│
+├── Dockerfile
+│
+├── app
+│   │
+│   └── index.html
+│
+├── screenshots
+│   │
+│   ├── terminal.png
+│   │
+│   ├── permission.png
+│   │
+│   ├── docker.png
+│   │
+│   ├── browser.png
+│   │
+│   ├── volume.png
+│   │
+│   └── github.png
+│
+└── .gitignore
+```
+
+
+
+---
+
+# .gitignore
+
+
+Git에 업로드하지 않을 파일을 관리합니다.
+
+
+예:
+
+
+```text
+.env
+
+node_modules/
+
+*.log
+
+.DS_Store
+```
+
+
+
+---
+
+# 실습 결과 정리
+
+
+## Terminal
+
+
+학습 내용:
+
+
+- CLI 명령어 사용
+- 파일 및 폴더 관리
+- 경로 이동
+
+
+결과:
+
+
+```
+기본 Linux 명령어 사용 가능
+```
+
+
+
+---
+
+## Linux Permission
+
+
+학습 내용:
+
+
+- 파일 권한 구조 이해
+- chmod 사용
+- 755 / 644 권한 적용
+
+
+결과:
+
+
+```
+파일 접근 권한 관리 가능
+```
+
+
+
+---
+
+## Git / GitHub
+
+
+학습 내용:
+
+
+- Repository 생성
+- Commit 관리
+- Remote 연결
+- Push
+
+
+결과:
+
+
+```
+프로젝트 버전 관리 및 공유 가능
+```
+
+
+
+---
+
+## Docker
+
+
+학습 내용:
+
+
+- Image와 Container 이해
+- Docker 실행
+- Dockerfile 작성
+- Web Server 구축
+
+
+결과:
+
+
+```
+Container 기반 실행 환경 구축 가능
+```
+
+
+
+---
+
+## Storage
+
+
+학습 내용:
+
+
+- Bind Mount
+- Volume
+
+
+결과:
+
+
+```
+파일 공유와 데이터 영속성 관리 가능
+```
+
+
+
+---
+
+# 회고
+
+
+이번 미션을 통해 개발 환경은 단순히 코드를 작성하는 공간이 아니라,
+
+코드가 실행되고 관리되며 협업할 수 있도록 구성하는 시스템이라는 것을 배웠습니다.
+
+
+
+처음에는 Terminal 명령어와 Docker 개념이 어렵게 느껴졌지만,
+
+직접 명령어를 입력하고 환경을 구성하면서
+
+개발자가 왜 자신의 작업 환경을 이해해야 하는지 알게 되었습니다.
+
+
+
+---
+
+## 배운 흐름
+
 
 ```text
 Terminal
-   ↓
-Linux 명령어 사용
-   ↓
-파일 및 권한 관리
-   ↓
-Git 버전 관리
-   ↓
-Docker Image 생성
-   ↓
-Container 실행
-   ↓
-Port 연결
-   ↓
-Volume 데이터 저장
-   ↓
-GitHub 공유
+
+↓
+
+Linux File System
+
+↓
+
+Permission
+
+↓
+
+Git
+
+↓
+
+GitHub
+
+↓
+
+Docker
+
+↓
+
+Container
+
+↓
+
+Deployment Environment
 ```
 
-</details>
-<details>
-<summary><strong> 개발 환경 구축 체크리스트 </strong></summary>
-개발 환경을 직접 구축하고 Git과 Docker를 활용할 수 있는 환경을 만드는 과정을 단계별로 정리한 체크리스트입니다.
 
-<details>
-<summary><strong> 진행 현황 </strong></summary>
-
-  ## 진행 현황
-
-| 단계 | 완료 |
-|:---|:---:|
-| [준비](#0-준비) | ⬜ |
-| [터미널](#1-터미널-익숙해지기) | ⬜ |
-| [파일 권한](#2-파일-권한) | ⬜ |
-| [Git 설정](#3-git-설정) | ⬜ |
-| [Docker 설치 확인](#4-docker-설치-확인) | ⬜ |
-| [Docker 첫 실행](#5-docker-첫-실행) | ⬜ |
-| [Ubuntu 컨테이너](#6-ubuntu-컨테이너) | ⬜ |
-| [Docker 명령어](#7-docker-명령어) | ⬜ |
-| [Dockerfile 작성](#8-dockerfile-작성) | ⬜ |
-| [포트 매핑](#9-포트-매핑) | ⬜ |
-| [Bind Mount](#10-bind-mount) | ⬜ |
-</details>
-
-
-## 0. 준비
-
-### 목표
-
-개발에 필요한 프로그램을 설치하고 프로젝트를 시작할 준비를 완료한다.
-
-### 해야 할 것
-
-#### 설치
-
-- [x] GitHub 회원가입
-- [ ] VSCode 설치
-- [ ] Git 설치
-- [ ] Docker Desktop 또는 OrbStack 설치
-
-#### 확인
-
-- [ ] Docker가 정상 실행되는지 확인
-- [x] GitHub Repository 생성
-- [ ] VSCode에서 Repository 열기
 
 ---
 
-## 1. 터미널 익숙해지기
+# 최종 학습 목표 달성
 
-### 목표
 
-리눅스 기본 명령어를 익히고 파일과 폴더를 다룰 수 있다.
+| 항목 | 결과 |
+|---|---|
+| 터미널 사용 | 완료 |
+| Linux 파일 관리 | 완료 |
+| 권한 관리 | 완료 |
+| Git 버전 관리 | 완료 |
+| GitHub 연결 | 완료 |
+| Docker 실행 | 완료 |
+| Dockerfile 작성 | 완료 |
+| Container 운영 | 완료 |
+| Storage 관리 | 완료 |
 
-### 해야 할 것
 
-#### 기본 명령어
-
-- [ ] `pwd`
-- [ ] `ls`
-- [ ] `ls -la`
-- [ ] `cd`
-- [ ] `mkdir`
-- [ ] `touch`
-- [ ] `cp`
-- [ ] `mv`
-- [ ] `rm`
-- [ ] `cat`
-
-### 증거
-
-#### 실행 결과
-
-- [ ] 명령어 입력 화면
-- [ ] 결과 출력 화면
-
-#### 문서화
-
-- [ ] README 기록
 
 ---
-
-## 2. 파일 권한
-
-### 목표
-
-리눅스 파일 권한의 개념을 이해한다.
-
-### 해야 할 것
-
-#### 권한 실습
-
-- [ ] 파일 생성
-- [ ] 폴더 생성
-- [ ] `ls -l` 확인
-- [ ] `chmod` 변경
-- [ ] 변경 전후 비교
-
-### 이해하기
-
-#### 권한 종류
-
-- [ ] `r (Read)`
-- [ ] `w (Write)`
-- [ ] `x (Execute)`
-
-#### 권한 숫자
-
-- [ ] `755`
-- [ ] `644`
-
----
-
-## 3. Git 설정
-
-### 목표
-
-Git을 사용할 수 있도록 사용자 정보를 설정한다.
-
-### 해야 할 것
-
-#### Git 설정
-
-- [ ] `git --version`
-- [ ] `git config user.name`
-- [ ] `git config user.email`
-- [ ] `git config --global init.defaultBranch main`
-- [ ] `git config --list`
-
----
-
-## 4. Docker 설치 확인
-
-### 목표
-
-Docker가 정상적으로 설치되었는지 확인한다.
-
-### 해야 할 것
-
-#### 설치 확인
-
-- [ ] `docker --version`
-- [ ] `docker info`
-
----
-
-## 5. Docker 첫 실행
-
-### 목표
-
-첫 번째 Docker 컨테이너를 실행한다.
-
-### 해야 할 것
-
-#### 실행
-
-- [ ] `hello-world` 실행
-- [ ] 성공 로그 저장
-
----
-
-## 6. Ubuntu 컨테이너
-
-### 목표
-
-Ubuntu 컨테이너 내부에서 명령어를 실행한다.
-
-### 해야 할 것
-
-#### 컨테이너 실습
-
-- [ ] Ubuntu 실행
-- [ ] bash 접속
-- [ ] `ls` 실행
-- [ ] `echo` 실행
-- [ ] `exit`
-
-### 이해하기
-
-#### 개념
-
-- [ ] `attach`
-- [ ] `exec` 차이
-
----
-
-## 7. Docker 명령어
-
-### 목표
-
-Docker에서 자주 사용하는 명령어를 익힌다.
-
-### 해야 할 것
-
-#### 명령어
-
-- [ ] `docker images`
-- [ ] `docker ps`
-- [ ] `docker ps -a`
-- [ ] `docker logs`
-- [ ] `docker stats`
-
----
-
-## 8. Dockerfile 작성
-
-### 목표
-
-Docker 이미지를 직접 생성한다.
-
-### 해야 할 것
-
-#### 프로젝트 생성
-
-- [ ] `app` 폴더 만들기
-- [ ] `index.html` 만들기
-
-#### 이미지 생성
-
-- [ ] `Dockerfile` 작성
-- [ ] `docker build`
-- [ ] `docker run`
-
----
-
-## 9. 포트 매핑
-
-### 목표
-
-컨테이너와 컴퓨터를 연결하여 웹페이지를 실행한다.
-
-### 해야 할 것
-
-#### 실행
-
-- [ ] `-p` 옵션 사용
-- [ ] `localhost` 접속
-- [ ] 브라우저 화면 캡처
-
-### 이해하기
-
-#### 개념
-
-- [ ] 왜 포트를 연결하는가
-
----
-
-## 10. Bind Mount
-
-### 목표
-
-호스트와 컨테이너의 파일을 연결한다.
-
-### 해야 할 것
-
-#### 실습
-
-- [ ] `-v` 옵션 사용
-- [ ] HTML 수정
-- [ ] 새로고침
-- [ ] 변경 확인
-
-### 이해하기
-
-#### 개념
-
-- [ ] 호스트 파일과 컨테이너 연결
-
----
-
-## 11. Docker Volume
-
-### 목표
-
-데이터를 영구적으로 저장하는 방법을 익힌다.
-
-### 해야 할 것
-
-#### 실습
-
-- [ ] Volume 생성
-- [ ] 데이터 저장
-- [ ] 컨테이너 삭제
-- [ ] 새 컨테이너 생성
-- [ ] 데이터 그대로 확인
-
-### 이해하기
-
-#### 개념
-
-- [ ] Volume은 왜 사용하는가
-
----
-
-## 12. GitHub 연동
-
-### 목표
-
-Git 저장소를 GitHub와 연결한다.
-
-### 해야 할 것
-
-#### Git 작업
-
-- [ ] `git init`
-- [ ] `git add`
-- [ ] `git commit`
-- [ ] `git remote add`
-- [ ] `git push`
-
-### 증거
-
-#### 확인
-
-- [ ] GitHub Repository
-- [ ] VSCode 로그인 화면
-
----
-
-## 13. README 작성
-
-### 목표
-
-실습 내용을 문서화한다.
-
-### 해야 할 것
-
-#### 작성 내용
-
-- [ ] 실행 환경 작성
-- [ ] 명령어 기록
-- [ ] Docker 설명
-- [ ] Git 설명
-- [ ] 포트 설명
-- [ ] Volume 설명
-- [ ] 권한 설명
-- [ ] 트러블슈팅 작성
-
----
-
-## 14. 트러블슈팅
-
-### 목표
-
-실습 중 발생할 수 있는 문제와 해결 과정을 기록한다.
-
-### 발생한 문제 체크
-
-#### Case 1. Docker 관련 문제
-
-- [ ] Docker Desktop 실행 안됨
-- [ ] Docker 설치 확인 실패
-- [ ] Docker daemon 연결 오류
-- [ ] 컨테이너 실행 실패
-- [ ] 이미지 빌드 실패
-
----
-
-#### Case 2. 네트워크 관련 문제
-
-- [ ] localhost 접속 안됨
-- [ ] 포트 충돌 발생
-- [ ] 포트 매핑 오류
-- [ ] 컨테이너 내부 서비스 접근 실패
-
----
-
-#### Case 3. Git 관련 문제
-
-- [ ] git push 실패
-- [ ] GitHub Repository 연결 오류
-- [ ] commit 누락
-- [ ] branch 오류
-- [ ] Git 인증 오류
-
----
-
-#### Case 4. 파일 및 권한 문제
-
-- [ ] 파일 접근 권한 오류
-- [ ] chmod 설정 오류
-- [ ] 파일 생성 실패
-- [ ] 폴더 접근 권한 문제
-
----
-
-#### Case 5. Docker 데이터 관리 문제
-
-- [ ] Bind Mount 연결 실패
-- [ ] Volume 생성 오류
-- [ ] 컨테이너 삭제 후 데이터 손실
-- [ ] 파일 변경 사항 반영 안됨
