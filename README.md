@@ -46,7 +46,7 @@
 | Shell | zsh (`/bin/zsh`) |
 | Terminal | macOS Terminal |
 | Editor | Visual Studio Code |
-| Container Runtime | TODO: OrbStack 또는 Docker Desktop |
+| Container Runtime | OrbStack |
 | Docker Version | Docker 28.5.2 (build ecc6942) |
 | Git Version | Git 2.53.0 |
 
@@ -79,7 +79,10 @@ $ docker --version
 Docker version 28.5.2, build ecc6942
 
 $ docker info
-# TODO: 아직 실행 결과를 기록하지 않았습니다.
+Client:
+ Version:    28.5.2
+ Context:    orbstack
+ Debug Mode: false
 ```
 
 처음에 `sw vers`를 입력했을 때 명령어를 찾을 수 없다는 오류가 발생했습니다. macOS 버전 확인 명령은 띄어쓰기 없이 밑줄을 사용한 `sw_vers`이므로 명령어를 수정하여 정상적으로 확인했습니다.
@@ -87,8 +90,7 @@ $ docker info
 증거 이미지:
 
 ```markdown
-<!-- 촬영 후 주석을 제거하고 실제 파일명으로 수정합니다. -->
-<!-- ![실행 환경 확인](./screenshots/01-environment.png) -->
+![실행 환경 확인](./screenshots/01-environment.png)
 ```
 
 </details>
@@ -99,7 +101,7 @@ $ docker info
 
 > 실제 수행하고 증거까지 기록한 항목만 `[x]`로 변경합니다.
 
-- [ ] 실행 환경 확인
+- [x] 실행 환경 확인
 - [ ] 터미널 기본 조작 및 작업 디렉터리 구성
 - [ ] 파일 권한 변경 실습
 - [ ] 디렉터리 권한 변경 실습
