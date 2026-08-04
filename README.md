@@ -105,9 +105,9 @@ Client:
 - [ ] 디렉터리 권한 변경 실습
 - [x] Git 사용자 정보 및 기본 브랜치 설정
 - [ ] GitHub 저장소 및 VSCode 연동
-- [ ] Docker 설치 및 데몬 점검
-- [ ] `hello-world` 실행
-- [ ] Ubuntu 컨테이너 실행 및 내부 진입
+- [x] Docker 설치 및 데몬 점검
+- [x] `hello-world` 실행
+- [x] Ubuntu 컨테이너 실행 및 내부 진입
 - [ ] 이미지·컨테이너 운영 명령 실행
 - [ ] Dockerfile 작성 및 커스텀 이미지 빌드
 - [ ] 웹 서버 컨테이너 실행
@@ -558,21 +558,83 @@ docker --version
 docker info
 ```
 
+### 8.1 확인 항목 설명
+
+| 항목 | 실제 결과 | 의미 |
+|---|---|---|
+| Docker CLI Version | 28.5.2 | 터미널에서 사용하는 Docker 명령 도구 버전 |
+| Context | `orbstack` | Docker 명령이 OrbStack 환경을 대상으로 실행됨 |
+| Server Version | 28.5.2 | 실제 컨테이너를 실행하는 Docker 엔진 버전 |
+| Operating System | OrbStack | Docker 엔진이 OrbStack에서 실행 중임 |
+| OSType | linux | 컨테이너 엔진의 운영체제 유형 |
+| Architecture | x86_64 | Docker 서버가 사용하는 CPU 아키텍처 |
+| Containers | 4개 | 현재 생성된 컨테이너 총개수 |
+| Images | 2개 | 로컬에 저장된 Docker 이미지 개수 |
+| Storage Driver | overlay2 | 컨테이너 파일 계층을 관리하는 저장 방식 |
+
+`docker info`에는 **Client**와 **Server**가 구분되어 표시됩니다.
+
+- **Client**: 사용자가 터미널에서 입력한 Docker 명령을 전달하는 프로그램
+- **Server**: 이미지와 컨테이너를 실제로 생성하고 실행하는 Docker 엔진
+
+Server 정보가 정상적으로 출력됐으므로 Docker CLI만 설치된 것이 아니라 OrbStack의 Docker 엔진도 정상 작동하고 있음을 확인할 수 있습니다.
+
 <details>
 <summary><strong>실제 점검 결과 기록</strong></summary>
 
 ```console
-# TODO: docker --version 결과
+$ docker --version
+Docker version 28.5.2, build ecc6942
 ```
 
 ```console
-# TODO: docker info의 핵심 결과
-# 전체 출력에 사용자 이름이나 시스템 정보가 있다면 마스킹합니다.
+$ docker nfo
+docker: unknown command: docker nfo
+
+Run 'docker --help' for more information
+
+$ docker info
+Client:
+ Version:    28.5.2
+ Context:    orbstack
+ Debug Mode: false
+
+Server:
+ Containers: 4
+  Running: 0
+  Paused: 0
+  Stopped: 4
+ Images: 2
+ Server Version: 28.5.2
+ Storage Driver: overlay2
+ Kernel Version: 6.17.8-orbstack-00308-g8f9c941121b1
+ Operating System: OrbStack
+ OSType: linux
+ Architecture: x86_64
+ CPUs: 6
+ Total Memory: 15.67GiB
+ Name: orbstack
+
+WARNING: DOCKER_INSECURE_NO_IPTABLES_RAW is set
 ```
 
-```markdown
-<!-- ![Docker 설치 및 데몬 점검](./screenshots/05-docker-info.png) -->
-```
+개인 사용자 경로, Docker ID, 주소 풀 등 제출에 불필요하거나 식별 가능성이 있는 정보는 생략했습니다.
+
+Docker 버전·명령어 오타 수정·OrbStack Client 확인:
+
+![Docker Client와 OrbStack 확인](./screenshots/06-docker-client.png)
+
+Docker Server·컨테이너·이미지·서버 버전 확인:
+
+![Docker Server 동작 확인](./screenshots/07-docker-server.png)
+
+확인한 내용:
+
+1. 처음에는 `docker nfo`로 잘못 입력해 `unknown command` 오류가 발생했습니다.
+2. 올바른 명령인 `docker info`로 수정하자 Client와 Server 정보가 정상 출력되었습니다.
+3. Client의 Context와 Server의 Operating System이 모두 OrbStack으로 확인되었습니다.
+4. Server Version, Containers, Images 정보가 출력되므로 Docker 엔진과의 연결이 정상임을 확인했습니다.
+5. 마지막 WARNING은 현재 OrbStack 환경의 네트워크 관련 경고이며, 이번 Docker 정보 조회가 실패했다는 의미는 아닙니다.
 
 </details>
 
@@ -586,11 +648,31 @@ docker info
 docker run --name hello-codyssey hello-world
 ```
 
+`docker run`은 이미지로 새 컨테이너를 만들어 실행합니다. `--name`은 이후 `start`, `logs`, `rm` 등의 명령에서 사용할 컨테이너 이름을 지정합니다. 로컬에 `hello-world` 이미지가 없으면 Docker가 먼저 이미지를 내려받습니다.
+
 ```console
-# TODO: "Hello from Docker!"가 포함된 실제 출력
+$ dicker run --name hello-Codyssey hello-wolrd
+zsh: command not found: dicker
+
+$ docker run --name hello-codyssey hello-world
+Hello from Docker!
+This message shows that your installation appears to be working correctly.
 ```
 
+첫 명령은 `docker`를 `dicker`로 잘못 입력해 실패했습니다. 명령어와 이미지 이름을 수정한 뒤 `Hello from Docker!`가 출력되어 Docker Client가 OrbStack의 Docker 엔진과 통신하고, 이미지를 내려받아 컨테이너를 실행하는 전체 흐름이 정상임을 확인했습니다.
+
+![hello-world 실행 성공](./screenshots/08-hello-world.png)
+
 ### 9.2 Ubuntu 컨테이너 실행
+
+| 구성 | 의미 |
+|---|---|
+| `run` | 이미지로 새 컨테이너를 생성하고 실행 |
+| `-i` | 표준 입력을 열린 상태로 유지 |
+| `-t` | 터미널 화면을 할당 |
+| `--name ubuntu-practice` | 컨테이너 이름을 `ubuntu-practice`로 지정 |
+| `ubuntu` | 사용할 이미지 이름 |
+| `bash` | 컨테이너 시작 시 실행할 명령 |
 
 ```bash
 docker run -it --name ubuntu-practice ubuntu bash
@@ -612,6 +694,8 @@ docker start -ai ubuntu-practice
 exit
 ```
 
+`start`는 이미 존재하는 컨테이너를 다시 시작합니다. `-a`는 출력에 연결하고 `-i`는 입력을 받을 수 있게 합니다. 따라서 새 컨테이너를 만드는 `run`과 달리 기존 `ubuntu-practice` 컨테이너를 재사용합니다.
+
 백그라운드에서 계속 실행되는 별도 컨테이너를 만들고 `exec`로 진입:
 
 ```bash
@@ -623,6 +707,12 @@ docker ps
 ```
 
 > `attach`는 컨테이너의 기존 주 프로세스에 연결하고, `exec`는 실행 중인 컨테이너 안에서 새 명령을 시작합니다. 셸이 주 프로세스인 컨테이너에서 `exit`하면 컨테이너가 종료될 수 있지만, `exec`로 연 셸에서 나와도 기존 `sleep infinity` 프로세스가 남아 컨테이너는 계속 실행됩니다.
+
+이번 실행에서는 컨테이너를 `ubuntu-backgound`로 생성했지만 `ubuntu-background`에 접속하려고 해 `No such container` 오류가 발생했습니다. 따라서 백그라운드 컨테이너 생성까지는 성공했지만 `exec` 진입과 실행 상태 확인은 아직 완료하지 않은 것으로 기록합니다.
+
+![Ubuntu 컨테이너 실행과 재접속](./screenshots/09-ubuntu-practice.png)
+
+![백그라운드 컨테이너 이름 불일치 오류](./screenshots/10-background-name-error.png)
 
 ### 9.3 운영 명령
 
@@ -639,22 +729,39 @@ docker stats --no-stream
 <summary><strong>실제 실행 및 운영 결과 기록</strong></summary>
 
 ```console
-# TODO: Ubuntu 컨테이너 내부 명령 출력
+$ docker run -it --name ubuntu-practice ubuntu bash
+root@<container-id>:/# pwd
+/
+root@<container-id>:/# ls
+bin  boot  dev  etc  home  lib  lib64  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
+root@<container-id>:/# echo "Hello from Ubuntu container"
+Hello from Ubuntu container
+root@<container-id>:/# exit
+exit
+
+$ docker start -ai ubuntu-practice
+root@<container-id>:/# exit
+exit
 ```
 
 ```console
-# TODO: images, ps -a, logs, stats 핵심 출력
+$ docker run -d --name ubuntu-backgound ubuntu sleep infinity
+<container-id>
+
+$ docker exec -it ubuntu-background bash
+Error response from daemon: No such container: ubuntu-background
 ```
 
-```markdown
-<!-- ![hello-world 실행](./screenshots/06-hello-world.png) -->
-<!-- ![Ubuntu 컨테이너 실습](./screenshots/07-ubuntu-container.png) -->
-<!-- ![Docker 운영 명령](./screenshots/08-docker-operations.png) -->
-```
+`docker images`, `docker ps -a`, `docker logs`, `docker stats` 결과는 다음 실습 후 이 위치에 추가합니다.
 
 관찰 결과:
 
-> TODO: `run`, `start`, `exec`, `exit`을 사용했을 때 컨테이너 상태가 어떻게 달라졌는지 작성합니다.
+1. `hello-world`는 메시지를 출력한 뒤 주 프로세스가 끝나므로 컨테이너도 종료됩니다.
+2. `docker run -it ... bash`는 새 Ubuntu 컨테이너와 대화형 셸을 만들며, 셸에서 `exit`하면 주 프로세스가 끝나 컨테이너가 종료됩니다.
+3. `docker start -ai ubuntu-practice`로 종료된 기존 컨테이너를 다시 시작해 같은 셸에 연결할 수 있었습니다.
+4. `docker run -d ... sleep infinity`는 터미널과 분리된 백그라운드 컨테이너를 생성합니다.
+5. 컨테이너 이름은 한 글자라도 다르면 다른 이름으로 처리됩니다. 이번에는 `backgound`와 `background`가 달라 `exec`에 실패했습니다.
+6. `ehco` 역시 `echo`의 오타였으며, 명령어는 철자와 공백을 정확히 입력해야 합니다.
 
 </details>
 
@@ -876,7 +983,7 @@ docker volume ls
 
 | 검증 항목 | 사용한 명령 | 상태 | 결과 위치 |
 |---|---|---|---|
-| 실행 환경 | `git --version`, `docker --version`, `docker info` | ⬜ | [기록](#2-실행-환경) |
+| 실행 환경 | `git --version`, `docker --version`, `docker info` | ✅ | [기록](#2-실행-환경) |
 | 터미널 조작 | `pwd`, `ls -la`, `cp`, `mv`, `rm` | ⬜ | [기록](#5-터미널-기본-조작-실습) |
 | 권한 변경 | `ls -l`, `ls -ld`, `chmod` | ⬜ | [기록](#6-파일-및-디렉터리-권한-실습) |
 | Git·GitHub 연동 | `git config --get`, `git remote -v`, `git status` | ✅ | [기록](#7-git-설정-및-githubvscode-연동) |
