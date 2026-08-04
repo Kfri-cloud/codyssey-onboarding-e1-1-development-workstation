@@ -42,13 +42,13 @@
 
 | 항목 | 실제 환경 |
 |---|---|
-| OS | TODO: 예) macOS 15.x |
-| Shell | TODO: 예) zsh |
-| Terminal | TODO: 예) macOS Terminal |
+| OS | macOS 15.7.4 (Build 24G517) |
+| Shell | zsh (`/bin/zsh`) |
+| Terminal | macOS Terminal |
 | Editor | Visual Studio Code |
 | Container Runtime | TODO: OrbStack 또는 Docker Desktop |
-| Docker Version | TODO: `docker --version` 결과 |
-| Git Version | TODO: `git --version` 결과 |
+| Docker Version | Docker 28.5.2 (build ecc6942) |
+| Git Version | Git 2.53.0 |
 
 ### 환경 확인 명령
 
@@ -64,9 +64,25 @@ docker info
 <summary><strong>실제 실행 결과 기록</strong></summary>
 
 ```console
-# TODO: 위 명령을 실행한 터미널 출력 결과를 붙여 넣습니다.
-# 사용자 이름, 이메일, 토큰 등 민감정보는 반드시 마스킹합니다.
+$ sw_vers
+ProductName:            macOS
+ProductVersion:         15.7.4
+BuildVersion:           24G517
+
+$ echo $SHELL
+/bin/zsh
+
+$ git --version
+git version 2.53.0
+
+$ docker --version
+Docker version 28.5.2, build ecc6942
+
+$ docker info
+# TODO: 아직 실행 결과를 기록하지 않았습니다.
 ```
+
+처음에 `sw vers`를 입력했을 때 명령어를 찾을 수 없다는 오류가 발생했습니다. macOS 버전 확인 명령은 띄어쓰기 없이 밑줄을 사용한 `sw_vers`이므로 명령어를 수정하여 정상적으로 확인했습니다.
 
 증거 이미지:
 
