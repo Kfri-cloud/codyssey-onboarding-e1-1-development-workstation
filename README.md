@@ -679,22 +679,34 @@ docker ps -a
 #### ④ 실제 실행 결과
 
 ```console
-# TODO: 실제 실행 결과를 추가합니다.
+$ docker images
+REPOSITORY    TAG       IMAGE ID       CREATED        SIZE
+ubuntu        latest    de7345b16e94   3 weeks ago    100MB
+hello-world   latest    e2ac70e7319a   4 months ago   10.1kB
+
+$ docker ps
+# TODO: 아직 실행하지 않았습니다.
+
+$ docker ps -a
+CONTAINER ID   IMAGE         COMMAND            STATUS                NAMES
+<container-id> hello-world   "/hello"           Exited (0)            sweet_hypatia
+<container-id> ubuntu        "sleep infinity"   Up 3 hours            ubuntu-backgound
+<container-id> ubuntu        "bash"             Exited (0)            ubuntu-practice
+<container-id> hello-world   "/hello"           Exited (0)            hello-codyssey
+... 일부 이전 컨테이너 생략 ...
 ```
 
 #### ⑤ 확인한 내용 또는 학습 결과
 
-- [ ] 이미지 목록을 확인했습니다.
-- [ ] 실행 중인 컨테이너 목록을 확인했습니다.
-- [ ] 종료된 컨테이너를 포함한 전체 목록을 확인했습니다.
+- [x] 이미지 목록을 확인했습니다.
+- [ ] 실행 중인 컨테이너만 보여 주는 `docker ps`는 아직 실행하지 않았습니다.
+- [x] 종료된 컨테이너를 포함한 전체 목록을 확인했습니다.
 
-> TODO: 직접 확인한 이미지와 컨테이너의 차이를 작성합니다.
+`docker images`에서는 로컬에 저장된 `ubuntu`와 `hello-world` 이미지를 확인했습니다. `docker ps -a`에서는 실행 중인 컨테이너뿐 아니라 종료된 컨테이너도 함께 표시되는 것을 확인했습니다.
 
 #### ⑥ 증거 이미지
 
-```markdown
-<!-- TODO: 개인정보를 마스킹한 증거 이미지를 업로드한 후 링크를 추가합니다. -->
-```
+![Docker 이미지와 전체 컨테이너 목록](./screenshots/12-docker-images-ps-masked.png)
 
 ---
 
@@ -778,26 +790,36 @@ docker run --name hello-codyssey hello-world
 docker run --name hello-codyssey hello-world
 ```
 
+이번에는 `--name` 옵션 없이 다음 명령을 실행했습니다. `--name`을 생략하면 Docker가 컨테이너 이름을 자동으로 만듭니다.
+
 #### ④ 실제 실행 결과
 
 ```console
-$ docker run --name hello-codyssey hello-world
-# TODO: 실제 출력 결과를 추가합니다.
+$ docker run hello-world
+
+Hello from Docker!
+This message shows that your installation appears to be working correctly.
+
+To generate this message, Docker took the following steps:
+ 1. The Docker client contacted the Docker daemon.
+ 2. The Docker daemon pulled the "hello-world" image from the Docker Hub.
+    (amd64)
+ 3. The Docker daemon created a new container from that image.
+ 4. The Docker daemon streamed that output to the Docker client.
 ```
 
 #### ⑤ 확인한 내용 또는 학습 결과
 
-- [ ] 명령을 직접 실행했습니다.
-- [ ] `Hello from Docker!` 문구가 출력되는지 확인했습니다.
-- [ ] `hello-codyssey` 컨테이너가 생성되었는지 확인했습니다.
+- [x] `docker run hello-world`를 직접 실행했습니다.
+- [x] `Hello from Docker!` 문구가 출력되는지 확인했습니다.
+- [x] 새 `hello-world` 컨테이너가 생성된 것을 `docker ps -a`로 확인했습니다.
+- [ ] `--name hello-codyssey`를 사용한 새 실행은 아직 하지 않았습니다.
 
-> TODO: 실제로 확인한 내용을 작성합니다.
+Docker Client가 Docker daemon에 연결하고, 이미지로 새 컨테이너를 생성한 뒤 결과를 터미널로 전달하는 과정을 확인했습니다. 이번 실행에서는 `--name`을 생략했기 때문에 Docker가 컨테이너 이름을 `sweet_hypatia`로 자동 지정했습니다.
 
 #### ⑥ 증거 이미지
 
-```markdown
-<!-- TODO: 개인정보를 마스킹한 hello-world 실행 이미지를 추가합니다. -->
-```
+![hello-world 실행 결과](./screenshots/11-docker-hello-world-masked.png)
 
 ---
 
@@ -1026,28 +1048,33 @@ docker ps -a
 
 ```console
 $ docker images
-# TODO: 실제 결과
+REPOSITORY    TAG       IMAGE ID       CREATED        SIZE
+ubuntu        latest    de7345b16e94   3 weeks ago    100MB
+hello-world   latest    e2ac70e7319a   4 months ago   10.1kB
 
 $ docker ps
-# TODO: 실제 결과
+# TODO: 아직 실행하지 않았습니다.
 
 $ docker ps -a
-# TODO: 실제 결과
+CONTAINER ID   IMAGE         COMMAND            STATUS                NAMES
+<container-id> hello-world   "/hello"           Exited (0)            sweet_hypatia
+<container-id> ubuntu        "sleep infinity"   Up 3 hours            ubuntu-backgound
+<container-id> ubuntu        "bash"             Exited (0)            ubuntu-practice
+<container-id> hello-world   "/hello"           Exited (0)            hello-codyssey
+... 일부 이전 컨테이너 생략 ...
 ```
 
 #### ⑤ 확인한 내용 또는 학습 결과
 
-- [ ] 이미지 목록을 확인했습니다.
-- [ ] 실행 중인 컨테이너만 확인했습니다.
-- [ ] 종료된 컨테이너를 포함한 전체 목록을 확인했습니다.
+- [x] 이미지 목록을 확인했습니다.
+- [ ] 실행 중인 컨테이너만 보여 주는 `docker ps`는 아직 실행하지 않았습니다.
+- [x] 종료된 컨테이너를 포함한 전체 목록을 확인했습니다.
 
-> TODO: 세 명령의 출력 차이를 작성합니다.
+`docker images`는 컨테이너를 만들 때 사용하는 이미지 목록을 보여 줍니다. `docker ps -a`는 실행 중인 컨테이너와 종료된 컨테이너를 모두 보여 줍니다. `docker ps`의 실제 결과는 다음 실습에서 확인합니다.
 
 #### ⑥ 증거 이미지
 
-```markdown
-<!-- TODO: 개인정보를 마스킹한 목록 확인 이미지를 추가합니다. -->
-```
+![Docker 이미지와 전체 컨테이너 목록](./screenshots/12-docker-images-ps-masked.png)
 
 ---
 
@@ -1154,17 +1181,17 @@ $ docker stats --no-stream
 |---|---|---|
 | 이미지와 컨테이너 차이 확인 | 미완료 | TODO |
 | 주요 명령과 옵션 이해 | 미완료 | TODO |
-| `hello-world` 실행 | 미완료 | TODO |
+| `hello-world` 실행 | 완료 | `Hello from Docker!` 출력 확인 |
 | Ubuntu 대화형 컨테이너 실행 | 미완료 | TODO |
 | `docker start -ai` 재실행 | 미완료 | TODO |
 | 백그라운드 컨테이너 실행 | 미완료 | TODO |
 | `docker exec` 내부 진입 | 미완료 | TODO |
-| `docker images` 실행 | 미완료 | TODO |
+| `docker images` 실행 | 완료 | Ubuntu와 hello-world 이미지 확인 |
 | `docker ps` 실행 | 미완료 | TODO |
-| `docker ps -a` 실행 | 미완료 | TODO |
+| `docker ps -a` 실행 | 완료 | 실행·종료 컨테이너 목록 확인 |
 | `docker logs` 실행 | 미완료 | TODO |
 | `docker stats --no-stream` 실행 | 미완료 | TODO |
-| 개인정보를 마스킹한 증거 이미지 등록 | 미완료 | TODO |
+| 개인정보를 마스킹한 증거 이미지 등록 | 진행 중 | 이번 실행 증거 3개 마스킹 완료 |
 
 ### 9.10 처음부터 실행할 명령 순서
 
@@ -1551,6 +1578,59 @@ git log --oneline -5
 ### 해결 결과
 
 로컬 초기 커밋을 복구용 브랜치로 먼저 보존한 후 로컬 `main`을 `origin/main`과 일치시켰습니다. 최종적으로 `HEAD`, `main`, `origin/main`이 모두 `ecb0588`을 가리키고 작업 폴더가 깨끗한 것을 확인했습니다.
+
+</details>
+
+---
+
+<details>
+<summary><strong>Case 3. Docker 명령 철자 및 포트 옵션 오류</strong></summary>
+
+### 문제
+
+Nginx 컨테이너를 백그라운드로 실행하고 포트 8080을 연결하려 했지만 명령 철자와 옵션을 잘못 입력했습니다.
+
+```console
+$ doker run -d -p 8080:80 nginx
+zsh: command not found: doker
+
+$ docker run -d -a 8080:80 nginx
+invalid argument "8080:80" for "-a, --attach" flag:
+valid streams are STDIN, STDOUT and STDERR
+```
+
+### 원인 가설
+
+첫 번째 명령은 Docker 설치 문제가 아니라 `docker`를 `doker`로 입력한 철자 오류로 예상했습니다. 두 번째 명령은 포트 연결 옵션 대신 다른 기능의 `-a` 옵션을 사용한 것으로 예상했습니다.
+
+### 확인 방법
+
+오류 메시지에서 `-a, --attach`가 받을 수 있는 값이 `STDIN`, `STDOUT`, `STDERR`라고 안내하는 것을 확인했습니다.
+
+### 실제 원인
+
+- `doker`는 `docker`의 오타입니다.
+- `-a`는 포트 연결 옵션이 아니라 컨테이너의 입출력 스트림에 연결하는 `--attach` 옵션입니다.
+- 호스트 포트와 컨테이너 포트를 연결할 때는 소문자 `-p` 옵션을 사용해야 합니다.
+
+### 다음에 실행할 올바른 명령
+
+```bash
+docker run -d -p 8080:80 nginx
+```
+
+| 명령 부분 | 의미 |
+|---|---|
+| `docker run` | 새 컨테이너를 생성하고 실행 |
+| `-d` | 백그라운드에서 실행 |
+| `-p 8080:80` | 내 Mac의 8080 포트를 컨테이너의 80 포트와 연결 |
+| `nginx` | 사용할 웹 서버 이미지 |
+
+### 해결 결과
+
+> TODO: 올바른 명령은 아직 실행하지 않았습니다. 성공 결과를 확인하기 전까지 Nginx 실행과 포트 매핑은 미완료로 유지합니다.
+
+![Docker 명령 철자 및 포트 옵션 오류](./screenshots/13-docker-nginx-errors-masked.png)
 
 </details>
 
