@@ -642,43 +642,207 @@ Docker Server·컨테이너·이미지·서버 버전 확인:
 
 ## 9. Docker 기본 실행 및 운영 명령
 
-### 9.1 hello-world 실행
+> 이 장은 Docker 실습을 처음부터 다시 진행하기 위한 학습 기록 양식입니다.  
+> 아직 실행한 것으로 처리하지 않으며, 직접 명령을 실행하고 결과를 확인한 항목만 `[x]`로 변경합니다.
+
+### 9.1 이미지와 컨테이너의 차이
+
+#### ① 학습 목표
+
+- Docker 이미지와 컨테이너가 무엇인지 구분합니다.
+- 하나의 이미지로 여러 컨테이너를 만들 수 있다는 점을 이해합니다.
+
+#### ② 개념 설명
+
+| 구분 | 쉬운 비유 | 의미 |
+|---|---|---|
+| 이미지(Image) | 붕어빵 틀 | 컨테이너 실행에 필요한 프로그램과 설정을 묶은 읽기 전용 설계도 |
+| 컨테이너(Container) | 틀로 만든 붕어빵 | 이미지를 기반으로 실제 생성되어 실행되는 독립된 환경 |
+
+```text
+Ubuntu 이미지
+├── Ubuntu 컨테이너 1
+├── Ubuntu 컨테이너 2
+└── Ubuntu 컨테이너 3
+```
+
+이미지는 컨테이너를 만드는 재료이고, 컨테이너는 그 이미지로 실제 실행한 결과입니다.
+
+#### ③ 실행할 명령
+
+```bash
+docker images
+docker ps
+docker ps -a
+```
+
+#### ④ 실제 실행 결과
+
+```console
+# TODO: 실제 실행 결과를 추가합니다.
+```
+
+#### ⑤ 확인한 내용 또는 학습 결과
+
+- [ ] 이미지 목록을 확인했습니다.
+- [ ] 실행 중인 컨테이너 목록을 확인했습니다.
+- [ ] 종료된 컨테이너를 포함한 전체 목록을 확인했습니다.
+
+> TODO: 직접 확인한 이미지와 컨테이너의 차이를 작성합니다.
+
+#### ⑥ 증거 이미지
+
+```markdown
+<!-- TODO: 개인정보를 마스킹한 증거 이미지를 업로드한 후 링크를 추가합니다. -->
+```
+
+---
+
+### 9.2 주요 명령과 옵션 이해하기
+
+#### ① 학습 목표
+
+- `run`, `start`, `attach`, `exec`, `exit`의 차이를 이해합니다.
+- `-i`, `-t`, `-d`, `-a`, `--name` 옵션의 역할을 이해합니다.
+
+#### ② 명령어 설명
+
+| 명령 | 무엇을 하는가? | 언제 사용하는가? |
+|---|---|---|
+| `docker run` | 이미지로 새 컨테이너를 만들고 실행 | 컨테이너를 처음 만들 때 |
+| `docker start` | 종료된 기존 컨테이너를 다시 실행 | 전에 만든 컨테이너를 재사용할 때 |
+| `docker attach` | 컨테이너에서 이미 실행 중인 주 프로세스에 연결 | 기존 입출력 화면에 연결할 때 |
+| `docker exec` | 실행 중인 컨테이너 안에서 새로운 명령을 실행 | 백그라운드 컨테이너에 새 셸을 열 때 |
+| `exit` | 현재 접속한 셸을 종료 | 컨테이너 내부 작업을 마칠 때 |
+
+| 옵션 | 의미 |
+|---|---|
+| `-i` | 키보드 입력을 받을 수 있도록 표준 입력을 열어 둠 |
+| `-t` | 명령을 입력하고 결과를 볼 수 있는 가상 터미널을 할당 |
+| `-d` | 현재 터미널과 분리하여 백그라운드에서 실행 |
+| `-a` | 컨테이너의 출력에 연결 |
+| `--name 이름` | 컨테이너를 관리할 때 사용할 이름 지정 |
+
+`docker run`은 새 컨테이너를 만들지만 `docker start`는 이미 존재하는 컨테이너를 다시 사용합니다.
+
+`docker attach`는 기존 주 프로세스에 연결하고, `docker exec`는 실행 중인 컨테이너 안에서 새로운 명령이나 셸을 시작합니다.
+
+#### ③ 실행할 명령
+
+이 단계에서는 개념을 먼저 학습합니다. 실제 명령은 다음 단계부터 순서대로 실행합니다.
+
+#### ④ 실제 실행 결과
+
+```console
+# TODO: 다음 단계의 실습 결과를 바탕으로 차이를 기록합니다.
+```
+
+#### ⑤ 확인한 내용 또는 학습 결과
+
+- [ ] `run`과 `start`의 차이를 설명할 수 있습니다.
+- [ ] `attach`와 `exec`의 차이를 설명할 수 있습니다.
+- [ ] 각 옵션의 역할을 설명할 수 있습니다.
+
+#### ⑥ 증거 이미지
+
+```markdown
+<!-- 이 단계는 개념 학습 단계이므로 별도 증거 이미지가 필요하지 않습니다. -->
+```
+
+---
+
+### 9.3 hello-world 실행
+
+#### ① 학습 목표
+
+- `docker run`으로 새 컨테이너를 생성하고 실행합니다.
+- Docker Client와 OrbStack의 Docker 엔진이 정상적으로 통신하는지 확인합니다.
+
+#### ② 명령어 설명
 
 ```bash
 docker run --name hello-codyssey hello-world
 ```
 
-`docker run`은 이미지로 새 컨테이너를 만들어 실행합니다. `--name`은 이후 `start`, `logs`, `rm` 등의 명령에서 사용할 컨테이너 이름을 지정합니다. 로컬에 `hello-world` 이미지가 없으면 Docker가 먼저 이미지를 내려받습니다.
+| 명령 부분 | 의미 |
+|---|---|
+| `docker run` | 이미지로 새 컨테이너를 생성하고 실행 |
+| `--name hello-codyssey` | 컨테이너 이름을 `hello-codyssey`로 지정 |
+| `hello-world` | 사용할 이미지 이름 |
 
-```console
-$ dicker run --name hello-Codyssey hello-wolrd
-zsh: command not found: dicker
+로컬에 `hello-world` 이미지가 없다면 Docker가 먼저 이미지를 내려받습니다. 컨테이너는 안내 문구를 출력한 후 작업을 마치므로 종료 상태가 되는 것이 정상입니다.
 
-$ docker run --name hello-codyssey hello-world
-Hello from Docker!
-This message shows that your installation appears to be working correctly.
+#### ③ 실행할 명령
+
+```bash
+docker run --name hello-codyssey hello-world
 ```
 
-첫 명령은 `docker`를 `dicker`로 잘못 입력해 실패했습니다. 명령어와 이미지 이름을 수정한 뒤 `Hello from Docker!`가 출력되어 Docker Client가 OrbStack의 Docker 엔진과 통신하고, 이미지를 내려받아 컨테이너를 실행하는 전체 흐름이 정상임을 확인했습니다.
+#### ④ 실제 실행 결과
 
-![hello-world 실행 성공](./screenshots/08-hello-world.png)
+```console
+$ docker run --name hello-codyssey hello-world
+# TODO: 실제 출력 결과를 추가합니다.
+```
 
-### 9.2 Ubuntu 컨테이너 실행
+#### ⑤ 확인한 내용 또는 학습 결과
 
-| 구성 | 의미 |
-|---|---|
-| `run` | 이미지로 새 컨테이너를 생성하고 실행 |
-| `-i` | 표준 입력을 열린 상태로 유지 |
-| `-t` | 터미널 화면을 할당 |
-| `--name ubuntu-practice` | 컨테이너 이름을 `ubuntu-practice`로 지정 |
-| `ubuntu` | 사용할 이미지 이름 |
-| `bash` | 컨테이너 시작 시 실행할 명령 |
+- [ ] 명령을 직접 실행했습니다.
+- [ ] `Hello from Docker!` 문구가 출력되는지 확인했습니다.
+- [ ] `hello-codyssey` 컨테이너가 생성되었는지 확인했습니다.
+
+> TODO: 실제로 확인한 내용을 작성합니다.
+
+#### ⑥ 증거 이미지
+
+```markdown
+<!-- TODO: 개인정보를 마스킹한 hello-world 실행 이미지를 추가합니다. -->
+```
+
+---
+
+### 9.4 Ubuntu 대화형 컨테이너 실행
+
+#### ① 학습 목표
+
+- Ubuntu 이미지로 대화형 컨테이너를 만듭니다.
+- 컨테이너 내부에서 기본 명령을 실행합니다.
+- 종료된 기존 컨테이너를 다시 실행합니다.
+
+#### ② 명령어 설명
 
 ```bash
 docker run -it --name ubuntu-practice ubuntu bash
 ```
 
-컨테이너 내부에서 실행:
+| 명령 부분 | 의미 |
+|---|---|
+| `docker run` | 새 컨테이너를 생성하고 실행 |
+| `-i` | 키보드 입력을 받을 수 있도록 입력을 열어 둠 |
+| `-t` | 대화형 가상 터미널을 할당 |
+| `--name ubuntu-practice` | 컨테이너 이름을 지정 |
+| `ubuntu` | 사용할 이미지 |
+| `bash` | 컨테이너 시작 시 실행할 셸 |
+
+컨테이너 안으로 들어가면 프롬프트가 `root@<container-id>:/#`처럼 바뀔 수 있습니다. 공개 문서에는 실제 컨테이너 ID를 `<container-id>`로 마스킹합니다.
+
+종료된 컨테이너를 다시 실행할 때는 다음 명령을 사용합니다.
+
+```bash
+docker start -ai ubuntu-practice
+```
+
+`-a`는 출력에 연결하고 `-i`는 입력을 받을 수 있게 합니다.
+
+#### ③ 실행할 명령
+
+먼저 새 컨테이너를 실행합니다.
+
+```bash
+docker run -it --name ubuntu-practice ubuntu bash
+```
+
+컨테이너 내부에서 실행합니다.
 
 ```bash
 pwd
@@ -687,37 +851,370 @@ echo "Hello from Ubuntu container"
 exit
 ```
 
-종료된 컨테이너를 다시 시작하면서 연결(`attach`):
+macOS 터미널로 돌아온 뒤 기존 컨테이너를 다시 시작합니다.
 
 ```bash
 docker start -ai ubuntu-practice
+```
+
+다시 접속한 컨테이너에서 빠져나옵니다.
+
+```bash
 exit
 ```
 
-`start`는 이미 존재하는 컨테이너를 다시 시작합니다. `-a`는 출력에 연결하고 `-i`는 입력을 받을 수 있게 합니다. 따라서 새 컨테이너를 만드는 `run`과 달리 기존 `ubuntu-practice` 컨테이너를 재사용합니다.
+#### ④ 실제 실행 결과
 
-백그라운드에서 계속 실행되는 별도 컨테이너를 만들고 `exec`로 진입:
+```console
+$ docker run -it --name ubuntu-practice ubuntu bash
+# TODO: 실제 실행 결과를 추가합니다.
+
+root@<container-id>:/# pwd
+# TODO: 실제 결과
+
+root@<container-id>:/# ls
+# TODO: 실제 결과
+
+root@<container-id>:/# echo "Hello from Ubuntu container"
+# TODO: 실제 결과
+
+root@<container-id>:/# exit
+# TODO: 실제 결과
+
+$ docker start -ai ubuntu-practice
+# TODO: 실제 재실행 결과
+```
+
+#### ⑤ 확인한 내용 또는 학습 결과
+
+- [ ] Ubuntu 컨테이너를 생성했습니다.
+- [ ] `pwd`로 컨테이너 내부 위치를 확인했습니다.
+- [ ] `ls`로 컨테이너 내부 목록을 확인했습니다.
+- [ ] `echo`로 문자열을 출력했습니다.
+- [ ] `exit`로 셸을 종료했습니다.
+- [ ] `docker start -ai`로 기존 컨테이너를 재실행했습니다.
+
+> TODO: 직접 확인한 내용을 작성합니다.
+
+#### ⑥ 증거 이미지
+
+```markdown
+<!-- TODO: 개인정보와 컨테이너 ID를 마스킹한 이미지를 추가합니다. -->
+```
+
+---
+
+### 9.5 백그라운드 컨테이너와 exec 실습
+
+#### ① 학습 목표
+
+- `-d` 옵션으로 컨테이너를 백그라운드에서 실행합니다.
+- `docker exec`로 실행 중인 컨테이너 내부에 새 셸을 엽니다.
+- `exec` 셸을 종료한 뒤에도 컨테이너가 계속 실행되는지 확인합니다.
+
+#### ② 명령어 설명
 
 ```bash
 docker run -d --name ubuntu-background ubuntu sleep infinity
+```
+
+| 명령 부분 | 의미 |
+|---|---|
+| `-d` | 컨테이너를 터미널과 분리하여 백그라운드에서 실행 |
+| `--name ubuntu-background` | 컨테이너 이름을 정확하게 지정 |
+| `sleep infinity` | 컨테이너가 종료되지 않고 계속 대기하도록 하는 주 프로세스 |
+
+실행 중인 컨테이너에 새 `bash` 셸을 여는 명령은 다음과 같습니다.
+
+```bash
 docker exec -it ubuntu-background bash
+```
+
+`docker exec`는 컨테이너 이름이 정확히 일치하고 컨테이너가 실행 중일 때 사용할 수 있습니다.
+
+#### ③ 실행할 명령
+
+```bash
+docker run -d --name ubuntu-background ubuntu sleep infinity
+docker ps
+docker exec -it ubuntu-background bash
+```
+
+컨테이너 내부에서 실행합니다.
+
+```bash
 echo "Entered with docker exec"
+pwd
 exit
+```
+
+macOS 터미널로 돌아온 뒤 실행 상태를 다시 확인합니다.
+
+```bash
 docker ps
 ```
 
-> `attach`는 컨테이너의 기존 주 프로세스에 연결하고, `exec`는 실행 중인 컨테이너 안에서 새 명령을 시작합니다. 셸이 주 프로세스인 컨테이너에서 `exit`하면 컨테이너가 종료될 수 있지만, `exec`로 연 셸에서 나와도 기존 `sleep infinity` 프로세스가 남아 컨테이너는 계속 실행됩니다.
+#### ④ 실제 실행 결과
 
-이번 실행에서는 컨테이너를 `ubuntu-backgound`로 생성했지만 `ubuntu-background`에 접속하려고 해 `No such container` 오류가 발생했습니다. 따라서 백그라운드 컨테이너 생성까지는 성공했지만 `exec` 진입과 실행 상태 확인은 아직 완료하지 않은 것으로 기록합니다.
+```console
+$ docker run -d --name ubuntu-background ubuntu sleep infinity
+# TODO: 실제 컨테이너 ID를 마스킹하여 추가합니다.
 
-![Ubuntu 컨테이너 실행과 재접속](./screenshots/09-ubuntu-practice.png)
+$ docker ps
+# TODO: 실제 결과
 
-![백그라운드 컨테이너 이름 불일치 오류](./screenshots/10-background-name-error.png)
+$ docker exec -it ubuntu-background bash
+# TODO: 실제 접속 결과
 
-### 9.3 운영 명령
+root@<container-id>:/# echo "Entered with docker exec"
+# TODO: 실제 결과
+
+root@<container-id>:/# pwd
+# TODO: 실제 결과
+
+root@<container-id>:/# exit
+# TODO: 실제 결과
+
+$ docker ps
+# TODO: exit 후 컨테이너 실행 상태
+```
+
+#### ⑤ 확인한 내용 또는 학습 결과
+
+- [ ] 백그라운드 컨테이너를 생성했습니다.
+- [ ] `docker ps`에서 실행 상태를 확인했습니다.
+- [ ] `docker exec`로 컨테이너 내부에 접속했습니다.
+- [ ] `exec` 셸에서 `echo`와 `pwd`를 실행했습니다.
+- [ ] `exit` 후에도 컨테이너가 실행 중인지 확인했습니다.
+
+> TODO: `attach`와 `exec`의 차이를 실제 결과와 함께 작성합니다.
+
+#### ⑥ 증거 이미지
+
+```markdown
+<!-- TODO: 개인정보와 컨테이너 ID를 마스킹한 exec 실습 이미지를 추가합니다. -->
+```
+
+---
+
+### 9.6 이미지와 컨테이너 목록 확인
+
+#### ① 학습 목표
+
+- 저장된 이미지와 생성된 컨테이너를 확인합니다.
+- `docker ps`와 `docker ps -a`의 차이를 확인합니다.
+
+#### ② 명령어 설명
+
+| 명령 | 무엇을 보여주는가? |
+|---|---|
+| `docker images` | 현재 컴퓨터에 저장된 Docker 이미지 |
+| `docker ps` | 현재 실행 중인 컨테이너만 표시 |
+| `docker ps -a` | 실행 중이거나 종료된 모든 컨테이너 표시 |
+
+`docker ps -a`의 `-a`는 `all`을 뜻합니다.
+
+#### ③ 실행할 명령
 
 ```bash
-docker pull nginx:alpine
+docker images
+docker ps
+docker ps -a
+```
+
+#### ④ 실제 실행 결과
+
+```console
+$ docker images
+# TODO: 실제 결과
+
+$ docker ps
+# TODO: 실제 결과
+
+$ docker ps -a
+# TODO: 실제 결과
+```
+
+#### ⑤ 확인한 내용 또는 학습 결과
+
+- [ ] 이미지 목록을 확인했습니다.
+- [ ] 실행 중인 컨테이너만 확인했습니다.
+- [ ] 종료된 컨테이너를 포함한 전체 목록을 확인했습니다.
+
+> TODO: 세 명령의 출력 차이를 작성합니다.
+
+#### ⑥ 증거 이미지
+
+```markdown
+<!-- TODO: 개인정보를 마스킹한 목록 확인 이미지를 추가합니다. -->
+```
+
+---
+
+### 9.7 컨테이너 로그 확인
+
+#### ① 학습 목표
+
+- 컨테이너가 출력한 내용을 나중에 다시 확인합니다.
+- 종료된 컨테이너도 로그를 조회할 수 있는지 확인합니다.
+
+#### ② 명령어 설명
+
+```bash
+docker logs hello-codyssey
+```
+
+`docker logs`는 컨테이너가 표준 출력과 표준 오류로 남긴 내용을 보여줍니다. 이미지 이름이 아니라 컨테이너 이름 또는 ID를 사용합니다.
+
+#### ③ 실행할 명령
+
+```bash
+docker logs hello-codyssey
+```
+
+#### ④ 실제 실행 결과
+
+```console
+$ docker logs hello-codyssey
+# TODO: 실제 로그를 추가합니다.
+```
+
+#### ⑤ 확인한 내용 또는 학습 결과
+
+- [ ] `hello-codyssey`의 로그를 확인했습니다.
+- [ ] 종료된 컨테이너의 로그를 조회할 수 있는지 확인했습니다.
+
+> TODO: 로그에서 확인한 내용을 작성합니다.
+
+#### ⑥ 증거 이미지
+
+```markdown
+<!-- TODO: 개인정보를 마스킹한 로그 이미지를 추가합니다. -->
+```
+
+---
+
+### 9.8 컨테이너 자원 사용량 확인
+
+#### ① 학습 목표
+
+- 실행 중인 컨테이너의 CPU와 메모리 사용량을 확인합니다.
+- 실시간 출력과 한 번만 출력하는 방식의 차이를 이해합니다.
+
+#### ② 명령어 설명
+
+| 명령 | 의미 |
+|---|---|
+| `docker stats` | 실행 중인 컨테이너의 자원 사용량을 계속 갱신 |
+| `docker stats --no-stream` | 자원 사용량을 한 번만 출력하고 종료 |
+
+주요 항목은 `CPU %`, `MEM USAGE / LIMIT`, `NET I/O`, `BLOCK I/O`, `PIDS`입니다. `docker stats`의 실시간 화면은 `Control + C`로 종료합니다.
+
+#### ③ 실행할 명령
+
+```bash
+docker stats --no-stream
+```
+
+선택적으로 실시간 출력을 확인합니다.
+
+```bash
+docker stats
+```
+
+#### ④ 실제 실행 결과
+
+```console
+$ docker stats --no-stream
+# TODO: 실제 결과를 추가합니다.
+```
+
+#### ⑤ 확인한 내용 또는 학습 결과
+
+- [ ] CPU 사용량을 확인했습니다.
+- [ ] 메모리 사용량을 확인했습니다.
+- [ ] 네트워크와 저장장치 사용량을 확인했습니다.
+- [ ] 실시간 출력의 종료 방법을 확인했습니다.
+
+> TODO: 실제로 표시된 컨테이너와 자원 사용량을 작성합니다.
+
+#### ⑥ 증거 이미지
+
+```markdown
+<!-- TODO: 개인정보를 마스킹한 자원 사용량 이미지를 추가합니다. -->
+```
+
+---
+
+### 9.9 현재 실습 상태
+
+> Docker 실습을 처음부터 다시 진행하므로 모든 항목을 미완료 상태로 시작합니다.
+
+| 실습 항목 | 상태 | 실제 확인 결과 |
+|---|---|---|
+| 이미지와 컨테이너 차이 확인 | 미완료 | TODO |
+| 주요 명령과 옵션 이해 | 미완료 | TODO |
+| `hello-world` 실행 | 미완료 | TODO |
+| Ubuntu 대화형 컨테이너 실행 | 미완료 | TODO |
+| `docker start -ai` 재실행 | 미완료 | TODO |
+| 백그라운드 컨테이너 실행 | 미완료 | TODO |
+| `docker exec` 내부 진입 | 미완료 | TODO |
+| `docker images` 실행 | 미완료 | TODO |
+| `docker ps` 실행 | 미완료 | TODO |
+| `docker ps -a` 실행 | 미완료 | TODO |
+| `docker logs` 실행 | 미완료 | TODO |
+| `docker stats --no-stream` 실행 | 미완료 | TODO |
+| 개인정보를 마스킹한 증거 이미지 등록 | 미완료 | TODO |
+
+### 9.10 처음부터 실행할 명령 순서
+
+> 아래 명령을 한 줄씩 실행하고, 각 결과가 무엇을 의미하는지 확인한 후 README에 기록합니다.
+
+```bash
+docker run --name hello-codyssey hello-world
+docker run -it --name ubuntu-practice ubuntu bash
+```
+
+Ubuntu 컨테이너 내부에서 실행합니다.
+
+```bash
+pwd
+ls
+echo "Hello from Ubuntu container"
+exit
+```
+
+macOS 터미널에서 이어서 실행합니다.
+
+```bash
+docker start -ai ubuntu-practice
+```
+
+다시 열린 Ubuntu 컨테이너에서 실행합니다.
+
+```bash
+exit
+```
+
+macOS 터미널에서 백그라운드 실습을 진행합니다.
+
+```bash
+docker run -d --name ubuntu-background ubuntu sleep infinity
+docker ps
+docker exec -it ubuntu-background bash
+```
+
+컨테이너 내부에서 실행합니다.
+
+```bash
+echo "Entered with docker exec"
+pwd
+exit
+```
+
+마지막으로 macOS 터미널에서 운영 명령을 확인합니다.
+
+```bash
 docker images
 docker ps
 docker ps -a
@@ -725,45 +1222,7 @@ docker logs hello-codyssey
 docker stats --no-stream
 ```
 
-<details>
-<summary><strong>실제 실행 및 운영 결과 기록</strong></summary>
-
-```console
-$ docker run -it --name ubuntu-practice ubuntu bash
-root@<container-id>:/# pwd
-/
-root@<container-id>:/# ls
-bin  boot  dev  etc  home  lib  lib64  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
-root@<container-id>:/# echo "Hello from Ubuntu container"
-Hello from Ubuntu container
-root@<container-id>:/# exit
-exit
-
-$ docker start -ai ubuntu-practice
-root@<container-id>:/# exit
-exit
-```
-
-```console
-$ docker run -d --name ubuntu-backgound ubuntu sleep infinity
-<container-id>
-
-$ docker exec -it ubuntu-background bash
-Error response from daemon: No such container: ubuntu-background
-```
-
-`docker images`, `docker ps -a`, `docker logs`, `docker stats` 결과는 다음 실습 후 이 위치에 추가합니다.
-
-관찰 결과:
-
-1. `hello-world`는 메시지를 출력한 뒤 주 프로세스가 끝나므로 컨테이너도 종료됩니다.
-2. `docker run -it ... bash`는 새 Ubuntu 컨테이너와 대화형 셸을 만들며, 셸에서 `exit`하면 주 프로세스가 끝나 컨테이너가 종료됩니다.
-3. `docker start -ai ubuntu-practice`로 종료된 기존 컨테이너를 다시 시작해 같은 셸에 연결할 수 있었습니다.
-4. `docker run -d ... sleep infinity`는 터미널과 분리된 백그라운드 컨테이너를 생성합니다.
-5. 컨테이너 이름은 한 글자라도 다르면 다른 이름으로 처리됩니다. 이번에는 `backgound`와 `background`가 달라 `exec`에 실패했습니다.
-6. `ehco` 역시 `echo`의 오타였으며, 명령어는 철자와 공백을 정확히 입력해야 합니다.
-
-</details>
+> 같은 이름의 컨테이너가 이미 존재한다는 오류가 발생하면 임의로 삭제하지 말고, 오류 메시지와 `docker ps -a` 결과를 먼저 기록합니다.
 
 ---
 
