@@ -89,9 +89,7 @@ Client:
 
 증거 이미지:
 
-```markdown
 ![실행 환경 확인](./screenshots/01-environment.png)
-```
 
 </details>
 
