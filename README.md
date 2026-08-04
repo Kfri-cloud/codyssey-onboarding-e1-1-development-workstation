@@ -100,7 +100,7 @@ Client:
 > 실제 수행하고 증거까지 기록한 항목만 `[x]`로 변경합니다.
 
 - [x] 실행 환경 확인
-- [ ] 터미널 기본 조작 및 작업 디렉터리 구성
+- [x] 터미널 기본 조작 및 작업 디렉터리 구성
 - [ ] 파일 권한 변경 실습
 - [ ] 디렉터리 권한 변경 실습
 - [ ] Git 사용자 정보 및 기본 브랜치 설정
@@ -275,16 +275,71 @@ ls -la
 <summary><strong>실제 실행 결과 기록</strong></summary>
 
 ```console
-# TODO: 명령어 입력과 출력 결과가 함께 보이도록 붙여 넣습니다.
+$ pwd
+/Users/[사용자명]
+
+$ mkdir -p
+usage: mkdir [-pv] [-m mode] directory_name ...
+
+$ mkdir -p~/codyssey/practice
+mkdir: illegal option -- ~
+usage: mkdir [-pv] [-m mode] directory_name ...
+
+$ mkdir -p ~/codyssey/practice
+
+$ cd ~codysseypractice
+zsh: no such user or named directory: codysseypractice
+
+$ cd ~/codyssey/practice
+$ ls -la
+total 0
+drwxr-xr-x  2 [사용자명]  [사용자명]  64  8  4 16:46 .
+drwxr-xr-x  3 [사용자명]  [사용자명]  96  8  4 16:46 ..
+
+$ touch original.txt
+$ echo "Codyssey CLI practice" > original.txt
+$ cat original.txt
+Codyssey CLI practice
+
+$ cp original.txt coide.txt
+$ mv coide.txt renamed.txt
+$ mkdir sample-directory
+$ rm renamed.txt
+
+$ rmdir samplre-directory
+rmdir: samplre-directory: No such file or directory
+
+$ rmdir sample-directory
 ```
 
-```markdown
-<!-- ![터미널 기본 조작 결과](./screenshots/02-terminal-practice.png) -->
-```
+### 단계별 화면
+
+실습 디렉터리 생성:
+
+![codyssey 디렉터리 생성](./screenshots/02-directory-created.png)
+
+`original.txt` 생성, 파일 복사·이름 변경 및 `sample-directory` 생성:
+
+![파일 생성과 이름 변경](./screenshots/03-file-copy-rename.png)
+
+`rm renamed.txt` 실행 후 `renamed.txt` 삭제:
+
+![파일 삭제 결과](./screenshots/04-file-delete.png)
+
+`rmdir sample-directory` 실행 후 빈 디렉터리 삭제:
+
+![디렉터리 삭제 결과](./screenshots/05-directory-delete.png)
 
 확인한 내용:
 
-> TODO: 파일 생성·복사·이름 변경·삭제 결과를 본인의 말로 작성합니다.
+1. `pwd`를 통해 홈 디렉터리의 절대 경로를 확인했습니다.
+2. `mkdir -p` 뒤에는 생성할 경로가 반드시 필요하며, 옵션과 경로 사이에도 공백이 필요하다는 것을 확인했습니다.
+3. `~`와 디렉터리 이름을 붙여 쓴 `~codysseypractice`는 특정 사용자 홈을 찾는 형태로 해석되므로, `~/codyssey/practice`처럼 슬래시로 경로를 구분해야 합니다.
+4. `touch`로 빈 파일을 만들고 `echo ... > 파일명`으로 내용을 기록한 뒤, `cat`으로 저장 결과를 확인했습니다.
+5. `cp`로 만든 `coide.txt`를 `mv`로 `renamed.txt`로 변경했습니다. 예시의 `copied.txt`와 이름은 다르지만 복사와 이름 변경 결과는 동일합니다.
+6. `rm`으로 파일을 삭제한 뒤 Finder에서 `renamed.txt`가 사라진 것을 확인했습니다.
+7. `samplre-directory`처럼 이름을 잘못 입력하면 `No such file or directory` 오류가 발생하며, 정확한 이름인 `sample-directory`로 수정하자 정상적으로 삭제되었습니다.
+8. 마지막에는 `original.txt`만 남아 파일과 빈 디렉터리 삭제가 모두 완료된 것을 확인했습니다.
 
 </details>
 
