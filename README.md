@@ -103,7 +103,7 @@ Client:
 - [x] 터미널 기본 조작 및 작업 디렉터리 구성
 - [ ] 파일 권한 변경 실습
 - [ ] 디렉터리 권한 변경 실습
-- [ ] Git 사용자 정보 및 기본 브랜치 설정
+- [x] Git 사용자 정보 및 기본 브랜치 설정
 - [ ] GitHub 저장소 및 VSCode 연동
 - [ ] Docker 설치 및 데몬 점검
 - [ ] `hello-world` 실행
@@ -465,13 +465,79 @@ git branch --show-current
 git remote -v
 ```
 
+### 7.3 명령어와 옵션 설명
+
+| 명령 | 의미 |
+|---|---|
+| `git config --global` | 현재 사용자의 모든 Git 저장소에 공통 설정 적용 |
+| `git config --global --get 항목` | 전체 목록 대신 지정한 설정값 하나만 확인 |
+| `git status` | 현재 브랜치와 작업 파일의 변경 상태 확인 |
+| `git branch --show-current` | 현재 체크아웃한 브랜치 이름 출력 |
+| `git remote -v` | 원격 저장소 이름과 fetch·push 주소 확인 |
+| `git fetch origin` | 원격 변경 이력만 내려받고 로컬 파일에는 바로 합치지 않음 |
+| `git log --left-right HEAD...origin/main` | 로컬과 원격 중 어느 쪽에만 존재하는 커밋인지 비교 |
+| `git branch backup/...` | 현재 커밋을 가리키는 복구용 브랜치 생성 |
+| `git reset --hard origin/main` | 로컬 브랜치와 작업 파일을 원격 브랜치 상태로 일치시킴 |
+
+> `git reset --hard`는 추적 중인 로컬 변경을 덮어쓸 수 있습니다. 이번 실습에서는 작업 폴더가 깨끗한 것을 확인하고 복구용 브랜치를 만든 뒤 실행했습니다.
+
 <details>
 <summary><strong>실제 설정 및 연동 결과 기록</strong></summary>
 
 ```console
-# TODO: Git 설정과 remote 확인 결과
-# 이메일, 사용자 경로 등 개인정보는 마스킹합니다.
+$ git config --global --get user.name
+Kfri
+
+$ git config --global --get user.email
+[이메일 마스킹]
+
+$ git config --global --get init.defaultBranch
+main
+
+$ git branch --show-current
+main
+
+$ git remote -v
+origin  https://github.com/Kfri-cloud/codyssey-onboarding-e1-1-development-workstation.git (fetch)
+origin  https://github.com/Kfri-cloud/codyssey-onboarding-e1-1-development-workstation.git (push)
+
+$ git log --oneline --left-right --graph --decorate HEAD...origin/main
+> ecb0588 (origin/main, origin/HEAD) Explain ls output and directory inspection
+> e8c0fb0 Add terminal practice evidence images
+> 30ff91b Record terminal practice results
+> c798b3f Explain terminal practice commands
+> a24bed4 Render environment screenshot in README
+> f38f4c9 Add masked environment evidence screenshot
+> 6596a56 Record OrbStack environment and evidence image
+> ac47a05 Record verified development environment
+> 04f8a9c Rewrite README as assignment evidence template
+< 907e68b (HEAD -> main) initial commit
+
+$ git branch backup/local-initial-20260804
+$ git reset --hard origin/main
+HEAD의 현재 위치는 ecb0588입니다 Explain ls output and directory inspection
+
+$ git status
+현재 브랜치 main
+브랜치가 'origin/main'에 맞게 업데이트된 상태입니다.
+
+커밋할 사항 없음, 작업 폴더 깨끗함
+
+$ git log --oneline -5
+ecb0588 (HEAD -> main, origin/main, origin/HEAD) Explain ls output and directory inspection
+e8c0fb0 Add terminal practice evidence images
+30ff91b Record terminal practice results
+c798b3f Explain terminal practice commands
+a24bed4 Render environment screenshot in README
 ```
+
+확인한 내용:
+
+1. Git 사용자 이름, 이메일, 기본 브랜치가 전역 설정에 등록된 것을 확인했습니다.
+2. 현재 브랜치는 `main`이며 `origin`이 올바른 GitHub 저장소 주소를 가리키는 것을 확인했습니다.
+3. 처음에는 로컬과 원격에 서로 다른 커밋이 존재하여 브랜치가 갈라져 있었습니다.
+4. 로컬 초기 커밋을 `backup/local-initial-20260804` 브랜치로 보존했습니다.
+5. 로컬 `main`을 `origin/main`에 맞춘 뒤 `HEAD`, `main`, `origin/main`이 동일한 `ecb0588` 커밋을 가리키는 것을 확인했습니다.
 
 VSCode GitHub 로그인 및 저장소 연동 증거:
 
@@ -813,7 +879,7 @@ docker volume ls
 | 실행 환경 | `git --version`, `docker --version`, `docker info` | ⬜ | [기록](#2-실행-환경) |
 | 터미널 조작 | `pwd`, `ls -la`, `cp`, `mv`, `rm` | ⬜ | [기록](#5-터미널-기본-조작-실습) |
 | 권한 변경 | `ls -l`, `ls -ld`, `chmod` | ⬜ | [기록](#6-파일-및-디렉터리-권한-실습) |
-| Git·GitHub 연동 | `git config --list`, `git remote -v` | ⬜ | [기록](#7-git-설정-및-githubvscode-연동) |
+| Git·GitHub 연동 | `git config --get`, `git remote -v`, `git status` | ✅ | [기록](#7-git-설정-및-githubvscode-연동) |
 | Docker 기본 실행 | `docker run`, `docker ps -a` | ⬜ | [기록](#9-docker-기본-실행-및-운영-명령) |
 | 커스텀 이미지 | `docker build`, `docker logs` | ⬜ | [기록](#10-dockerfile-기반-커스텀-웹-서버) |
 | 포트 매핑 | `curl`, `docker port` | ⬜ | [기록](#11-포트-매핑-및-접속-검증) |
@@ -827,88 +893,98 @@ docker volume ls
 > 아래 양식을 복사하여 실제로 발생한 문제를 최소 2건 기록합니다. 단순히 예상되는 오류를 작성하지 않고, 확인 명령과 해결 후 결과를 함께 남깁니다.
 
 <details>
-<summary><strong>Case 1. TODO: 실제 문제 제목</strong></summary>
+<summary><strong>Case 1. Git 설정 명령어 오타</strong></summary>
 
 ### 문제
 
-> TODO: 어떤 명령을 실행했을 때 어떤 오류가 발생했는지 작성합니다.
+Git 사용자 이메일과 기본 브랜치를 설정하는 과정에서 옵션, 공백, 철자를 잘못 입력했습니다.
 
 ```console
-# TODO: 실제 오류 메시지
+$ git config --user.email "[이메일 마스킹]"
+error: unknown option `user.email'
+
+$ --list
+zsh: command not found: --list
+
+$ config --list
+zsh: command not found: config
 ```
 
 ### 원인 가설
 
-> TODO: 처음에 예상한 원인을 작성합니다.
+Git 설치 문제 또는 `git config` 사용 방식의 문제라고 예상했습니다.
 
 ### 확인 방법
 
 ```bash
-# TODO: 원인을 확인하기 위해 사용한 명령
+git config --list
 ```
 
 ```console
-# TODO: 확인 결과
+user.name=Kfri
+user.email=[이메일 마스킹]
+init.defualbranch=main
 ```
 
 ### 실제 원인
 
-> TODO: 확인 후 발견한 실제 원인
+`--global` 대신 존재하지 않는 `--user.email`을 사용했고, 일부 명령에서 `git`을 빠뜨렸습니다. 또한 `default`를 `defual`로 잘못 입력해 틀린 이름의 설정 항목이 생성되었습니다.
 
 ### 해결 또는 대안
 
 ```bash
-# TODO: 해결에 사용한 명령
+git config --global --unset init.defualbranch
+git config --global init.defaultBranch main
+git config --global --get user.name
+git config --global --get user.email
+git config --global --get init.defaultBranch
 ```
 
 ### 해결 결과
 
-> TODO: 해결 여부와 다시 검증한 결과
-
-```markdown
-<!-- ![트러블슈팅 1](./screenshots/15-troubleshooting-1.png) -->
-```
+잘못 생성된 `init.defualbranch` 항목을 삭제하고 올바른 `init.defaultBranch=main` 설정을 등록했습니다. `--get`을 사용해 이름, 이메일, 기본 브랜치를 각각 확인했습니다.
 
 </details>
 
 <details>
-<summary><strong>Case 2. TODO: 실제 문제 제목</strong></summary>
+<summary><strong>Case 2. 로컬 main과 origin/main 커밋 갈라짐</strong></summary>
 
 ### 문제
 
-> TODO: 실제 발생한 문제
+`git status`에서 로컬과 원격 브랜치에 서로 다른 커밋이 존재한다는 메시지가 출력되었습니다.
 
 ```console
-# TODO: 실제 오류 메시지
+현재 브랜치와 'origin/main'이(가) 갈라졌습니다,
+다른 커밋이 각각 1개와 9개 있습니다.
 ```
 
 ### 원인 가설
 
-> TODO: 처음 예상한 원인
+로컬 저장소에서 만든 초기 커밋과 GitHub에서 갱신된 README 커밋이 서로 다른 이력으로 진행된 것으로 예상했습니다.
 
 ### 확인 방법
 
 ```bash
-# TODO: 확인 명령
+git fetch origin
+git log --oneline --left-right --graph --decorate HEAD...origin/main
 ```
 
 ### 실제 원인
 
-> TODO: 확인 후 발견한 원인
+비교 결과 `<`로 표시된 로컬 전용 초기 커밋 1개와 `>`로 표시된 원격 전용 커밋 9개가 확인되었습니다.
 
 ### 해결 또는 대안
 
 ```bash
-# TODO: 해결 명령 또는 대안
+git branch backup/local-initial-20260804
+git reset --hard origin/main
+git status
+git log --oneline -5
 ```
 
 ### 해결 결과
 
-> TODO: 해결 후 검증 결과
-
-```markdown
-<!-- ![트러블슈팅 2](./screenshots/16-troubleshooting-2.png) -->
-```
+로컬 초기 커밋을 복구용 브랜치로 먼저 보존한 후 로컬 `main`을 `origin/main`과 일치시켰습니다. 최종적으로 `HEAD`, `main`, `origin/main`이 모두 `ecb0588`을 가리키고 작업 폴더가 깨끗한 것을 확인했습니다.
 
 </details>
 
